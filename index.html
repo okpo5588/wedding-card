@@ -10,23 +10,25 @@
 
     body {
       font-family: "Malgun Gothic", "Apple SD Gothic Neo", sans-serif;
-      background: linear-gradient(to bottom, #fff8f8, #fffdfb);
-      color: #333;
+      background:
+        radial-gradient(circle at top, #fff7fb 0%, #fffaf2 45%, #fffdf8 100%);
+      color: #4d4d4d;
       line-height: 1.7;
     }
 
     .wrap {
       max-width: 520px;
       margin: 0 auto;
-      background: #fff;
+      background: #ffffff;
       min-height: 100vh;
-      box-shadow: 0 0 20px rgba(0,0,0,0.08);
+      box-shadow: 0 12px 36px rgba(219, 153, 170, 0.16);
+      overflow: hidden;
     }
 
     .hero {
       position: relative;
       overflow: hidden;
-      background: #f7f7f7;
+      background: linear-gradient(180deg, #fff4f8 0%, #fffaf3 100%);
     }
 
     .hero img {
@@ -36,59 +38,70 @@
     }
 
     .hero-text {
-      padding: 28px 20px 24px;
+      padding: 30px 20px 26px;
       text-align: center;
-      background: linear-gradient(to bottom, rgba(255,255,255,0.96), rgba(255,255,255,1));
+      background:
+        linear-gradient(to bottom, rgba(255,255,255,0.96), rgba(255,250,245,1));
     }
 
     .badge {
       display: inline-block;
       padding: 8px 16px;
       border-radius: 999px;
-      background: #8b1e2d;
+      background: linear-gradient(135deg, #ff9eb5 0%, #f6b16a 100%);
       color: #fff;
       font-size: 14px;
+      font-weight: bold;
       margin-bottom: 14px;
+      box-shadow: 0 8px 18px rgba(245, 176, 106, 0.24);
     }
 
     h1 {
       font-size: 34px;
-      color: #7a1f2b;
+      color: #cf6f8d;
       margin-bottom: 0;
+      letter-spacing: -0.5px;
     }
 
     .section {
-      padding: 32px 20px;
+      padding: 34px 20px;
       text-align: center;
-      border-top: 1px solid #f1e6e8;
+      border-top: 1px solid #f8e6eb;
+      background: linear-gradient(180deg, #ffffff 0%, #fffdfb 100%);
+    }
+
+    .section:nth-child(even) {
+      background: linear-gradient(180deg, #fffdfc 0%, #fff8fb 100%);
     }
 
     .section-title {
-      font-size: 24px;
-      color: #8b1e2d;
-      margin-bottom: 16px;
+      font-size: 26px;
+      color: #dd7d98;
+      margin-bottom: 18px;
       font-weight: bold;
+      letter-spacing: -0.3px;
     }
 
     .names {
       font-size: 28px;
       font-weight: bold;
-      color: #4d2e2e;
+      color: #8d6674;
       margin-bottom: 14px;
     }
 
     .heart {
-      color: #c84d63;
+      color: #ff90ab;
       padding: 0 8px;
     }
 
     .info-box {
-      background: #fff8f9;
-      border: 1px solid #f3dce1;
-      border-radius: 18px;
-      padding: 20px;
+      background: linear-gradient(180deg, #fff7fa 0%, #fffdf9 100%);
+      border: 1px solid #f7d9e2;
+      border-radius: 22px;
+      padding: 22px;
       margin-top: 18px;
       text-align: left;
+      box-shadow: 0 8px 22px rgba(237, 183, 194, 0.14);
     }
 
     .info-row {
@@ -105,11 +118,11 @@
     .label {
       min-width: 70px;
       font-weight: bold;
-      color: #8b1e2d;
+      color: #e0829c;
     }
 
     .value {
-      color: #444;
+      color: #5b5b5b;
       flex: 1;
     }
 
@@ -117,14 +130,14 @@
       display: flex;
       flex-direction: column;
       gap: 12px;
-      margin-top: 20px;
+      margin-top: 22px;
     }
 
     .btn {
       display: inline-block;
       width: 100%;
       border: none;
-      border-radius: 14px;
+      border-radius: 16px;
       padding: 15px 16px;
       font-size: 16px;
       font-weight: bold;
@@ -138,45 +151,49 @@
     }
 
     .btn-primary {
-      background: #8b1e2d;
+      background: linear-gradient(135deg, #ff9cb2 0%, #f4b36c 100%);
       color: white;
+      box-shadow: 0 10px 22px rgba(246, 177, 106, 0.25);
     }
 
     .btn-secondary {
-      background: #f7ecef;
-      color: #8b1e2d;
-      border: 1px solid #eed1d8;
+      background: linear-gradient(180deg, #fff6f8 0%, #fffdfc 100%);
+      color: #d57693;
+      border: 1px solid #f3d7df;
+      box-shadow: 0 6px 14px rgba(233, 192, 202, 0.14);
     }
 
     .music-box {
-      background: #fffaf3;
-      border: 1px solid #f0e3c2;
-      border-radius: 18px;
+      background: linear-gradient(180deg, #fffaf3 0%, #fff6fb 100%);
+      border: 1px solid #f5dfc7;
+      border-radius: 22px;
       padding: 20px;
+      box-shadow: 0 8px 20px rgba(245, 208, 175, 0.14);
     }
 
     .account-card,
     .guestbook-form,
     .guestbook-item {
-      background: #fff9fb;
-      border: 1px solid #efd8df;
-      border-radius: 18px;
+      background: linear-gradient(180deg, #fff8fb 0%, #fffefb 100%);
+      border: 1px solid #f5dbe3;
+      border-radius: 22px;
       padding: 18px;
       margin-top: 16px;
       text-align: left;
+      box-shadow: 0 8px 18px rgba(232, 188, 198, 0.12);
     }
 
     .account-title,
     .guestbook-item-name {
       font-size: 18px;
       font-weight: bold;
-      color: #8b1e2d;
+      color: #dd7d98;
       margin-bottom: 10px;
     }
 
     .account-text {
       font-size: 16px;
-      color: #444;
+      color: #5b5b5b;
       margin-bottom: 12px;
       word-break: break-all;
     }
@@ -184,13 +201,14 @@
     .copy-btn {
       width: 100%;
       border: none;
-      background: #8b1e2d;
+      background: linear-gradient(135deg, #ff9cb2 0%, #f4b36c 100%);
       color: white;
-      border-radius: 12px;
+      border-radius: 14px;
       padding: 13px;
       font-size: 15px;
       font-weight: bold;
       cursor: pointer;
+      box-shadow: 0 10px 20px rgba(246, 177, 106, 0.2);
     }
 
     .gallery {
@@ -204,29 +222,37 @@
       width: 100%;
       height: 180px;
       object-fit: cover;
-      border-radius: 14px;
+      border-radius: 16px;
       display: block;
+      box-shadow: 0 8px 18px rgba(226, 190, 197, 0.16);
     }
 
     .footer {
       text-align: center;
       padding: 30px 20px 40px;
-      color: #777;
+      color: #b18895;
       font-size: 14px;
-      background: #fff8f8;
-      border-top: 1px solid #f3e3e7;
+      background: linear-gradient(180deg, #fff7fa 0%, #fffaf3 100%);
+      border-top: 1px solid #f5e0e6;
     }
 
     .input,
     .textarea {
       width: 100%;
-      border: 1px solid #e7cfd6;
-      background: #fff;
-      border-radius: 12px;
+      border: 1px solid #efd5dd;
+      background: #ffffff;
+      border-radius: 14px;
       padding: 14px;
       font-size: 15px;
       outline: none;
       margin-bottom: 12px;
+      color: #555;
+    }
+
+    .input:focus,
+    .textarea:focus {
+      border-color: #f3a3b7;
+      box-shadow: 0 0 0 4px rgba(255, 176, 196, 0.16);
     }
 
     .textarea {
@@ -250,13 +276,13 @@
 
     .guestbook-item-date {
       font-size: 12px;
-      color: #999;
+      color: #b9a3ac;
       margin-bottom: 8px;
     }
 
     .guestbook-item-message {
       font-size: 15px;
-      color: #444;
+      color: #555;
       white-space: pre-wrap;
       word-break: break-word;
     }
@@ -264,22 +290,24 @@
     .status-text {
       margin-top: 12px;
       font-size: 14px;
-      color: #8b1e2d;
+      color: #d47b95;
       text-align: center;
     }
 
     .empty-text {
       padding: 18px;
-      border-radius: 16px;
-      background: #faf4f6;
-      color: #777;
+      border-radius: 18px;
+      background: linear-gradient(180deg, #fff7fa 0%, #fffdf8 100%);
+      color: #a88a95;
       font-size: 15px;
+      border: 1px solid #f4dee5;
     }
 
     @media (max-width: 420px) {
       h1 { font-size: 30px; }
       .names { font-size: 24px; }
       .gallery img { height: 150px; }
+      .section-title { font-size: 24px; }
     }
   </style>
 </head>
