@@ -214,17 +214,58 @@
     .gallery {
       display: grid;
       grid-template-columns: 1fr 1fr;
-      gap: 10px;
+      gap: 12px;
       margin-top: 18px;
     }
 
-    .gallery img {
+    .gallery-btn {
+      display: block;
+      width: 100%;
+      border: none;
+      background: transparent;
+      padding: 0;
+      cursor: pointer;
+      border-radius: 16px;
+      overflow: hidden;
+      position: relative;
+      box-shadow: 0 8px 18px rgba(226, 190, 197, 0.16);
+      transition: transform 0.18s ease, box-shadow 0.18s ease;
+    }
+
+    .gallery-btn:active {
+      transform: scale(0.98);
+    }
+
+    .gallery-btn::after {
+      content: "크게 보기";
+      position: absolute;
+      left: 50%;
+      bottom: 10px;
+      transform: translateX(-50%);
+      background: rgba(0, 0, 0, 0.45);
+      color: #fff;
+      font-size: 12px;
+      padding: 5px 10px;
+      border-radius: 999px;
+      opacity: 0;
+      transition: opacity 0.2s ease;
+      pointer-events: none;
+    }
+
+    .gallery-btn:hover::after {
+      opacity: 1;
+    }
+
+    .gallery-btn img {
       width: 100%;
       height: 180px;
       object-fit: cover;
-      border-radius: 16px;
       display: block;
-      box-shadow: 0 8px 18px rgba(226, 190, 197, 0.16);
+      transition: transform 0.25s ease;
+    }
+
+    .gallery-btn:hover img {
+      transform: scale(1.04);
     }
 
     .footer {
@@ -303,11 +344,90 @@
       border: 1px solid #f4dee5;
     }
 
+    .lightbox {
+      position: fixed;
+      inset: 0;
+      background: rgba(24, 18, 22, 0.84);
+      backdrop-filter: blur(6px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      z-index: 9999;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.28s ease;
+    }
+
+    .lightbox.show {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .lightbox-inner {
+      position: relative;
+      width: 100%;
+      max-width: 1100px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transform: scale(0.9) translateY(18px);
+      transition: transform 0.28s ease;
+    }
+
+    .lightbox.show .lightbox-inner {
+      transform: scale(1) translateY(0);
+    }
+
+    .lightbox-img {
+      max-width: 96vw;
+      max-height: 86vh;
+      width: auto;
+      height: auto;
+      border-radius: 18px;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.35);
+      background: #fff;
+    }
+
+    .lightbox-close {
+      position: absolute;
+      top: -14px;
+      right: -4px;
+      width: 42px;
+      height: 42px;
+      border: none;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.95);
+      color: #cc6d8b;
+      font-size: 24px;
+      font-weight: bold;
+      cursor: pointer;
+      box-shadow: 0 10px 24px rgba(0,0,0,0.18);
+    }
+
+    .lightbox-caption {
+      position: absolute;
+      left: 50%;
+      bottom: -44px;
+      transform: translateX(-50%);
+      color: #fff;
+      font-size: 14px;
+      background: rgba(0,0,0,0.32);
+      padding: 8px 14px;
+      border-radius: 999px;
+      white-space: nowrap;
+    }
+
     @media (max-width: 420px) {
       h1 { font-size: 30px; }
       .names { font-size: 24px; }
-      .gallery img { height: 150px; }
+      .gallery-btn img { height: 150px; }
       .section-title { font-size: 24px; }
+      .lightbox-caption {
+        bottom: -38px;
+        font-size: 12px;
+        padding: 7px 12px;
+      }
     }
   </style>
 </head>
@@ -384,16 +504,43 @@
     <section class="section">
       <div class="section-title">Gallery</div>
       <div class="gallery">
-        <img src="main.jpg" alt="갤러리 사진 1" />
-        <img src="sub1.jpg" alt="갤러리 사진 2" />
-        <img src="sub2.jpg" alt="갤러리 사진 3" />
-        <img src="sub3.jpg" alt="갤러리 사진 4" />
+        <button class="gallery-btn" type="button" data-full="main.jpg" data-caption="사진 1">
+          <img src="main.jpg" alt="갤러리 사진 1" />
+        </button>
+
+        <button class="gallery-btn" type="button" data-full="sub1.jpg" data-caption="사진 2">
+          <img src="sub1.jpg" alt="갤러리 사진 2" />
+        </button>
+
+        <button class="gallery-btn" type="button" data-full="sub2.jpg" data-caption="사진 3">
+          <img src="sub2.jpg" alt="갤러리 사진 3" />
+        </button>
+
+        <button class="gallery-btn" type="button" data-full="sub3.jpg" data-caption="사진 4">
+          <img src="sub3.jpg" alt="갤러리 사진 4" />
+        </button>
+
+        <button class="gallery-btn" type="button" data-full="sub4.jpg" data-caption="사진 5">
+          <img src="sub4.jpg" alt="갤러리 사진 5" />
+        </button>
+
+        <button class="gallery-btn" type="button" data-full="sub5.jpg" data-caption="사진 6">
+          <img src="sub5.jpg" alt="갤러리 사진 6" />
+        </button>
       </div>
     </section>
 
     <footer class="footer">
       박영길 ♥ 김하늘 피로연 안내장
     </footer>
+  </div>
+
+  <div id="lightbox" class="lightbox" aria-hidden="true">
+    <div class="lightbox-inner">
+      <button id="lightboxClose" class="lightbox-close" type="button" aria-label="닫기">×</button>
+      <img id="lightboxImg" class="lightbox-img" src="" alt="확대 사진" />
+      <div id="lightboxCaption" class="lightbox-caption"></div>
+    </div>
   </div>
 
   <script>
@@ -437,6 +584,52 @@
           document.body.removeChild(textArea);
         });
     }
+
+    const lightbox = document.getElementById("lightbox");
+    const lightboxImg = document.getElementById("lightboxImg");
+    const lightboxCaption = document.getElementById("lightboxCaption");
+    const lightboxClose = document.getElementById("lightboxClose");
+    const galleryButtons = document.querySelectorAll(".gallery-btn");
+
+    function openLightbox(src, caption) {
+      lightboxImg.src = src;
+      lightboxCaption.textContent = caption || "";
+      lightbox.classList.add("show");
+      lightbox.setAttribute("aria-hidden", "false");
+      document.body.style.overflow = "hidden";
+    }
+
+    function closeLightbox() {
+      lightbox.classList.remove("show");
+      lightbox.setAttribute("aria-hidden", "true");
+      document.body.style.overflow = "";
+      setTimeout(() => {
+        if (!lightbox.classList.contains("show")) {
+          lightboxImg.src = "";
+          lightboxCaption.textContent = "";
+        }
+      }, 250);
+    }
+
+    galleryButtons.forEach((button) => {
+      button.addEventListener("click", () => {
+        openLightbox(button.dataset.full, button.dataset.caption);
+      });
+    });
+
+    lightboxClose.addEventListener("click", closeLightbox);
+
+    lightbox.addEventListener("click", (e) => {
+      if (e.target === lightbox) {
+        closeLightbox();
+      }
+    });
+
+    document.addEventListener("keydown", (e) => {
+      if (e.key === "Escape" && lightbox.classList.contains("show")) {
+        closeLightbox();
+      }
+    });
   </script>
 
   <script type="module">
