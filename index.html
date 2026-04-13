@@ -155,7 +155,9 @@
       padding: 20px;
     }
 
-    .account-card {
+    .account-card,
+    .guestbook-form,
+    .guestbook-item {
       background: #fff9fb;
       border: 1px solid #efd8df;
       border-radius: 18px;
@@ -164,7 +166,8 @@
       text-align: left;
     }
 
-    .account-title {
+    .account-title,
+    .guestbook-item-name {
       font-size: 18px;
       font-weight: bold;
       color: #8b1e2d;
@@ -212,6 +215,65 @@
       font-size: 14px;
       background: #fff8f8;
       border-top: 1px solid #f3e3e7;
+    }
+
+    .input,
+    .textarea {
+      width: 100%;
+      border: 1px solid #e7cfd6;
+      background: #fff;
+      border-radius: 12px;
+      padding: 14px;
+      font-size: 15px;
+      outline: none;
+      margin-bottom: 12px;
+    }
+
+    .textarea {
+      min-height: 120px;
+      resize: vertical;
+      font-family: inherit;
+    }
+
+    .guestbook-actions {
+      display: flex;
+      gap: 10px;
+    }
+
+    .guestbook-list {
+      margin-top: 18px;
+    }
+
+    .guestbook-item {
+      margin-top: 12px;
+    }
+
+    .guestbook-item-date {
+      font-size: 12px;
+      color: #999;
+      margin-bottom: 8px;
+    }
+
+    .guestbook-item-message {
+      font-size: 15px;
+      color: #444;
+      white-space: pre-wrap;
+      word-break: break-word;
+    }
+
+    .status-text {
+      margin-top: 12px;
+      font-size: 14px;
+      color: #8b1e2d;
+      text-align: center;
+    }
+
+    .empty-text {
+      padding: 18px;
+      border-radius: 16px;
+      background: #faf4f6;
+      color: #777;
+      font-size: 15px;
     }
 
     @media (max-width: 420px) {
@@ -282,6 +344,23 @@
     </section>
 
     <section class="section">
+      <div class="section-title">방명록</div>
+
+      <div class="guestbook-form">
+        <input id="guestName" class="input" type="text" maxlength="20" placeholder="이름" />
+        <textarea id="guestMessage" class="textarea" maxlength="300" placeholder="축하 메시지를 남겨주세요"></textarea>
+        <div class="guestbook-actions">
+          <button id="saveGuestbookBtn" class="btn btn-primary" type="button">메시지 남기기</button>
+        </div>
+        <div id="guestbookStatus" class="status-text"></div>
+      </div>
+
+      <div id="guestbookList" class="guestbook-list">
+        <div class="empty-text">아직 등록된 메시지가 없어요.</div>
+      </div>
+    </section>
+
+    <section class="section">
       <div class="section-title">Gallery</div>
       <div class="gallery">
         <img src="main.jpg" alt="갤러리 사진 1" />
@@ -322,6 +401,128 @@
         .then(() => alert("계좌정보가 복사됐어."))
         .catch(() => alert("복사에 실패했어."));
     }
+  </script>
+
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/12.12.0/firebase-app.js";
+    import {
+      getFirestore,
+      collection,
+      addDoc,
+      getDocs,
+      query,
+      orderBy,
+      limit
+    } from "https://www.gstatic.com/firebasejs/12.12.0/firebase-firestore.js";
+
+    const firebaseConfig = {
+      apiKey: "AIzaSyAnRejVV1FNWTRNEOwEezx4xI04ZhTD6LM",
+      authDomain: "wedding-2c2ed.firebaseapp.com",
+      projectId: "wedding-2c2ed",
+      storageBucket: "wedding-2c2ed.firebasestorage.app",
+      messagingSenderId: "44011060327",
+      appId: "1:44011060327:web:d37cc08f5482056ee14ab2",
+      measurementId: "G-YK4PEEH3J5"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const db = getFirestore(app);
+
+    const guestName = document.getElementById("guestName");
+    const guestMessage = document.getElementById("guestMessage");
+    const saveGuestbookBtn = document.getElementById("saveGuestbookBtn");
+    const guestbookList = document.getElementById("guestbookList");
+    const guestbookStatus = document.getElementById("guestbookStatus");
+
+    function escapeHtml(text) {
+      const div = document.createElement("div");
+      div.textContent = text;
+      return div.innerHTML;
+    }
+
+    function formatDate(ts) {
+      const d = new Date(ts);
+      const y = d.getFullYear();
+      const m = String(d.getMonth() + 1).padStart(2, "0");
+      const day = String(d.getDate()).padStart(2, "0");
+      const hh = String(d.getHours()).padStart(2, "0");
+      const mm = String(d.getMinutes()).padStart(2, "0");
+      return `${y}.${m}.${day} ${hh}:${mm}`;
+    }
+
+    function renderGuestbook(items) {
+      if (!items.length) {
+        guestbookList.innerHTML = `<div class="empty-text">아직 등록된 메시지가 없어요.</div>`;
+        return;
+      }
+
+      guestbookList.innerHTML = items.map(item => `
+        <div class="guestbook-item">
+          <div class="guestbook-item-name">${escapeHtml(item.name)}</div>
+          <div class="guestbook-item-date">${formatDate(item.createdAt)}</div>
+          <div class="guestbook-item-message">${escapeHtml(item.message)}</div>
+        </div>
+      `).join("");
+    }
+
+    async function loadGuestbook() {
+      try {
+        guestbookStatus.textContent = "불러오는 중...";
+        const q = query(
+          collection(db, "guestbook"),
+          orderBy("createdAt", "desc"),
+          limit(30)
+        );
+        const snapshot = await getDocs(q);
+        const items = snapshot.docs.map(doc => doc.data());
+        renderGuestbook(items);
+        guestbookStatus.textContent = "";
+      } catch (error) {
+        console.error(error);
+        guestbookStatus.textContent = "방명록을 불러오지 못했어.";
+      }
+    }
+
+    async function saveGuestbook() {
+      const name = guestName.value.trim();
+      const message = guestMessage.value.trim();
+
+      if (!name) {
+        alert("이름을 입력해줘.");
+        guestName.focus();
+        return;
+      }
+
+      if (!message) {
+        alert("메시지를 입력해줘.");
+        guestMessage.focus();
+        return;
+      }
+
+      try {
+        saveGuestbookBtn.disabled = true;
+        guestbookStatus.textContent = "등록하는 중...";
+
+        await addDoc(collection(db, "guestbook"), {
+          name,
+          message,
+          createdAt: Date.now()
+        });
+
+        guestName.value = "";
+        guestMessage.value = "";
+        guestbookStatus.textContent = "등록됐어.";
+        await loadGuestbook();
+      } catch (error) {
+        console.error(error);
+        guestbookStatus.textContent = "등록에 실패했어.";
+      } finally {
+        saveGuestbookBtn.disabled = false;
+      }
+    }
+
+    saveGuestbookBtn.addEventListener("click", saveGuestbook);
+    loadGuestbook();
   </script>
 </body>
 </html>
