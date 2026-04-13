@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="ko">
 <head>
   <meta charset="UTF-8" />
@@ -7,12 +7,14 @@
   <meta name="description" content="박영길 김하늘 피로연 안내장" />
   <style>
     * { box-sizing: border-box; margin: 0; padding: 0; }
+
     body {
       font-family: "Malgun Gothic", "Apple SD Gothic Neo", sans-serif;
       background: linear-gradient(to bottom, #fff8f8, #fffdfb);
       color: #333;
       line-height: 1.7;
     }
+
     .wrap {
       max-width: 520px;
       margin: 0 auto;
@@ -20,13 +22,25 @@
       min-height: 100vh;
       box-shadow: 0 0 20px rgba(0,0,0,0.08);
     }
-    .hero { position: relative; overflow: hidden; background: #f7f7f7; }
-    .hero img { width: 100%; display: block; object-fit: cover; }
+
+    .hero {
+      position: relative;
+      overflow: hidden;
+      background: #f7f7f7;
+    }
+
+    .hero img {
+      width: 100%;
+      display: block;
+      object-fit: cover;
+    }
+
     .hero-text {
-      padding: 28px 20px 20px;
+      padding: 28px 20px 24px;
       text-align: center;
       background: linear-gradient(to bottom, rgba(255,255,255,0.96), rgba(255,255,255,1));
     }
+
     .badge {
       display: inline-block;
       padding: 8px 16px;
@@ -36,27 +50,38 @@
       font-size: 14px;
       margin-bottom: 14px;
     }
-    h1 { font-size: 34px; color: #7a1f2b; margin-bottom: 10px; }
-    .subtitle { font-size: 17px; color: #666; margin-bottom: 10px; }
-    .desc { font-size: 15px; color: #555; padding: 0 10px; }
+
+    h1 {
+      font-size: 34px;
+      color: #7a1f2b;
+      margin-bottom: 0;
+    }
+
     .section {
       padding: 32px 20px;
       text-align: center;
       border-top: 1px solid #f1e6e8;
     }
+
     .section-title {
       font-size: 24px;
       color: #8b1e2d;
       margin-bottom: 16px;
       font-weight: bold;
     }
+
     .names {
       font-size: 28px;
       font-weight: bold;
       color: #4d2e2e;
       margin-bottom: 14px;
     }
-    .heart { color: #c84d63; padding: 0 8px; }
+
+    .heart {
+      color: #c84d63;
+      padding: 0 8px;
+    }
+
     .info-box {
       background: #fff8f9;
       border: 1px solid #f3dce1;
@@ -65,28 +90,36 @@
       margin-top: 18px;
       text-align: left;
     }
+
     .info-row {
       display: flex;
       gap: 10px;
       margin-bottom: 12px;
       font-size: 16px;
     }
-    .info-row:last-child { margin-bottom: 0; }
+
+    .info-row:last-child {
+      margin-bottom: 0;
+    }
+
     .label {
       min-width: 70px;
       font-weight: bold;
       color: #8b1e2d;
     }
+
     .value {
       color: #444;
       flex: 1;
     }
+
     .btn-area {
       display: flex;
       flex-direction: column;
       gap: 12px;
       margin-top: 20px;
     }
+
     .btn {
       display: inline-block;
       width: 100%;
@@ -99,22 +132,29 @@
       text-decoration: none;
       transition: 0.2s;
     }
-    .btn:active { transform: scale(0.98); }
+
+    .btn:active {
+      transform: scale(0.98);
+    }
+
     .btn-primary {
       background: #8b1e2d;
       color: white;
     }
+
     .btn-secondary {
       background: #f7ecef;
       color: #8b1e2d;
       border: 1px solid #eed1d8;
     }
+
     .music-box {
       background: #fffaf3;
       border: 1px solid #f0e3c2;
       border-radius: 18px;
       padding: 20px;
     }
+
     .account-card {
       background: #fff9fb;
       border: 1px solid #efd8df;
@@ -123,18 +163,21 @@
       margin-top: 16px;
       text-align: left;
     }
+
     .account-title {
       font-size: 18px;
       font-weight: bold;
       color: #8b1e2d;
       margin-bottom: 10px;
     }
+
     .account-text {
       font-size: 16px;
       color: #444;
       margin-bottom: 12px;
       word-break: break-all;
     }
+
     .copy-btn {
       width: 100%;
       border: none;
@@ -146,12 +189,14 @@
       font-weight: bold;
       cursor: pointer;
     }
+
     .gallery {
       display: grid;
       grid-template-columns: 1fr 1fr;
       gap: 10px;
       margin-top: 18px;
     }
+
     .gallery img {
       width: 100%;
       height: 180px;
@@ -159,6 +204,7 @@
       border-radius: 14px;
       display: block;
     }
+
     .footer {
       text-align: center;
       padding: 30px 20px 40px;
@@ -167,11 +213,7 @@
       background: #fff8f8;
       border-top: 1px solid #f3e3e7;
     }
-    .notice {
-      font-size: 14px;
-      color: #777;
-      margin-top: 12px;
-    }
+
     @media (max-width: 420px) {
       h1 { font-size: 30px; }
       .names { font-size: 24px; }
@@ -186,11 +228,6 @@
       <div class="hero-text">
         <div class="badge">피로연 안내</div>
         <h1>박영길 ♥ 김하늘</h1>
-        <div class="subtitle">소중한 분들을 초대합니다</div>
-        <p class="desc">
-          함께 걸어갈 두 사람의 새로운 시작을<br />
-          따뜻한 마음으로 축복해 주세요.
-        </p>
       </div>
     </section>
 
@@ -207,10 +244,6 @@
           <div class="label">장소</div>
           <div class="value">수월 온기당</div>
         </div>
-        <div class="info-row">
-          <div class="label">안내</div>
-          <div class="value">귀한 걸음 하시어 두 사람의 앞날을 축복해 주세요.</div>
-        </div>
       </div>
 
       <div class="btn-area">
@@ -225,11 +258,7 @@
     <section class="section">
       <div class="section-title">Music</div>
       <div class="music-box">
-        <p style="margin-bottom: 14px; font-size: 16px; color: #555;">
-          아래 버튼을 누르면 배경음악이 재생돼요.
-        </p>
         <button id="musicBtn" class="btn btn-primary">🎵 음악 재생</button>
-        <div class="notice">휴대폰에서는 자동재생이 막힐 수 있어서 버튼 방식이 가장 안정적이야.</div>
         <audio id="bgm" loop>
           <source src="music.mp3" type="audio/mpeg" />
         </audio>
@@ -250,30 +279,16 @@
         <div class="account-text">김하늘 / 신한은행 / 110-123-456789</div>
         <button class="copy-btn" onclick="copyText('김하늘 / 신한은행 / 110-123-456789')">신부측 계좌 복사</button>
       </div>
-
-      <div class="notice">계좌번호는 실제 정보로 꼭 바꿔서 사용해.</div>
     </section>
 
     <section class="section">
       <div class="section-title">Gallery</div>
-      <p style="font-size: 15px; color: #666; margin-bottom: 10px;">
-        소중한 순간을 함께 나눕니다
-      </p>
-
       <div class="gallery">
         <img src="main.jpg" alt="갤러리 사진 1" />
         <img src="sub1.jpg" alt="갤러리 사진 2" />
         <img src="sub2.jpg" alt="갤러리 사진 3" />
         <img src="sub3.jpg" alt="갤러리 사진 4" />
       </div>
-    </section>
-
-    <section class="section">
-      <div class="section-title">With Love</div>
-      <p style="font-size: 16px; color: #555;">
-        오셔서 두 사람의 새로운 출발을<br />
-        따뜻하게 축복해 주시면 감사하겠습니다.
-      </p>
     </section>
 
     <footer class="footer">
@@ -298,14 +313,14 @@
           musicBtn.textContent = "🎵 음악 재생";
         }
       } catch (e) {
-        alert("음악 재생에 실패했어. music.mp3 파일이 있는지 확인해줘.");
+        alert("음악 재생에 실패했어.");
       }
     });
 
     function copyText(text) {
       navigator.clipboard.writeText(text)
         .then(() => alert("계좌정보가 복사됐어."))
-        .catch(() => alert("복사에 실패했어. 길게 눌러서 직접 복사해줘."));
+        .catch(() => alert("복사에 실패했어."));
     }
   </script>
 </body>
