@@ -35,6 +35,12 @@
       color: inherit;
     }
 
+    button,
+    input,
+    textarea {
+      font-family: inherit;
+    }
+
     .wrap {
       max-width: 480px;
       margin: 0 auto;
@@ -131,6 +137,7 @@
       font-size: 16px;
       color: #555;
       white-space: pre-line;
+      word-break: keep-all;
     }
 
     .card {
@@ -163,6 +170,7 @@
       font-size: 17px;
       font-weight: 600;
       color: #222;
+      word-break: keep-all;
     }
 
     .count-card {
@@ -441,7 +449,6 @@
     .reveal.delay-2 { transition-delay: 0.16s; }
     .reveal.delay-3 { transition-delay: 0.24s; }
 
-    /* 편지봉투 시작화면 */
     .intro {
       position: fixed;
       inset: 0;
@@ -539,6 +546,7 @@
     .envelope-letter span {
       line-height: 1.8;
       text-align: center;
+      padding: 0 10px;
     }
 
     .envelope-front {
@@ -597,7 +605,6 @@
       transform: translateY(-64px);
     }
 
-    /* 꽃잎 */
     .petal-container {
       position: fixed;
       inset: 0;
@@ -619,6 +626,150 @@
       animation-timing-function: linear, ease-in-out;
       animation-iteration-count: infinite, infinite;
       box-shadow: 0 1px 4px rgba(0,0,0,0.06);
+    }
+
+    .guestbook-form {
+      padding: 18px;
+      text-align: left;
+    }
+
+    .guestbook-input,
+    .guestbook-textarea {
+      width: 100%;
+      border: 1px solid #ead9cc;
+      border-radius: 14px;
+      padding: 13px 14px;
+      font-size: 15px;
+      color: #333;
+      background: #fff;
+      outline: none;
+      margin-bottom: 10px;
+    }
+
+    .guestbook-input:focus,
+    .guestbook-textarea:focus {
+      border-color: #d8b39f;
+      box-shadow: 0 0 0 4px rgba(216,179,159,0.14);
+    }
+
+    .guestbook-textarea {
+      min-height: 120px;
+      resize: vertical;
+    }
+
+    .guestbook-submit {
+      width: 100%;
+      border: none;
+      border-radius: 12px;
+      padding: 13px;
+      background: #d8b39f;
+      color: #fff;
+      font-size: 15px;
+      font-weight: 700;
+      cursor: pointer;
+    }
+
+    .guestbook-submit:disabled {
+      opacity: 0.6;
+      cursor: default;
+    }
+
+    .guestbook-status {
+      margin-top: 10px;
+      font-size: 13px;
+      color: #8b6a59;
+      text-align: center;
+      min-height: 20px;
+    }
+
+    .guestbook-topline {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      margin: 0 18px 8px;
+      color: #8b6a59;
+      font-size: 12px;
+    }
+
+    .guestbook-list {
+      padding: 0 18px;
+    }
+
+    .guestbook-item {
+      background: #fffaf7;
+      border: 1px solid #f0dfd3;
+      border-radius: 18px;
+      padding: 16px 14px;
+      margin-bottom: 10px;
+      text-align: left;
+    }
+
+    .guestbook-item-name {
+      font-size: 15px;
+      font-weight: 700;
+      color: #222;
+      margin-bottom: 4px;
+    }
+
+    .guestbook-item-date {
+      font-size: 12px;
+      color: #a98b7a;
+      margin-bottom: 8px;
+    }
+
+    .guestbook-item-message {
+      font-size: 14px;
+      color: #555;
+      white-space: pre-wrap;
+      word-break: break-word;
+      line-height: 1.65;
+    }
+
+    .guestbook-empty {
+      background: #fffaf7;
+      border: 1px solid #f0dfd3;
+      border-radius: 18px;
+      padding: 20px 14px;
+      color: #8f786b;
+      font-size: 14px;
+      text-align: center;
+    }
+
+    .guestbook-pagination {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      flex-wrap: wrap;
+      margin: 14px 18px 0;
+    }
+
+    .page-btn {
+      min-width: 26px;
+      height: 26px;
+      padding: 0 8px;
+      border-radius: 999px;
+      border: 1px solid #ead9cc;
+      background: #fff;
+      color: #8b6a59;
+      font-size: 12px;
+      cursor: pointer;
+      line-height: 24px;
+    }
+
+    .page-btn.active {
+      background: #d8b39f;
+      border-color: #d8b39f;
+      color: #fff;
+      font-weight: 700;
+    }
+
+    .page-summary {
+      text-align: center;
+      margin-top: 8px;
+      color: #a98b7a;
+      font-size: 12px;
     }
 
     @keyframes heroZoom {
@@ -683,18 +834,10 @@
     }
 
     @keyframes petalSway {
-      0%, 100% {
-        margin-left: 0;
-      }
-      25% {
-        margin-left: 18px;
-      }
-      50% {
-        margin-left: -18px;
-      }
-      75% {
-        margin-left: 12px;
-      }
+      0%, 100% { margin-left: 0; }
+      25% { margin-left: 18px; }
+      50% { margin-left: -18px; }
+      75% { margin-left: 12px; }
     }
 
     @media (max-width: 390px) {
@@ -722,10 +865,8 @@
   </style>
 </head>
 <body>
-  <!-- 꽃잎 -->
   <div class="petal-container" id="petalContainer"></div>
 
-  <!-- 편지봉투 입장화면 -->
   <div class="intro" id="intro">
     <div class="intro-box">
       <div class="intro-title">박영길 ♥ 김하늘 피로연 안내장</div>
@@ -734,7 +875,7 @@
         <div class="envelope">
           <div class="envelope-back"></div>
           <div class="envelope-letter">
-            <span>초대합니다<br>눌러서 입장하세요</span>
+            <span>한국에서 마련한<br>피로연에 초대합니다</span>
           </div>
           <div class="envelope-front"></div>
           <div class="envelope-flap"></div>
@@ -748,7 +889,7 @@
 
   <div class="wrap">
     <section class="hero">
-      <img src="./main.jpg?v=102" alt="메인 사진" />
+      <img src="./main.jpg?v=103" alt="메인 사진" />
       <div class="hero-text">
         <div class="hero-badge">RECEPTION INVITATION</div>
         <div class="hero-title">박영길 ♥ 김하늘</div>
@@ -759,12 +900,13 @@
     <section class="section reveal">
       <div class="section-title">소중한 분들을 모십니다</div>
       <div class="divider"></div>
-      <div class="message">두 사람이 서로를 아끼고 사랑하는 마음으로
-하나가 되는 날을 맞이하게 되었습니다.
+      <div class="message">먼저 해외에서 예식을 올린 뒤,
+한국에서는 감사한 분들을 모시고
+작은 피로연 자리를 마련하게 되었습니다.
 
-바쁘시더라도 함께하시어
-따뜻한 축복으로 자리를 빛내 주시면
-큰 기쁨이 되겠습니다.</div>
+바쁘시더라도 귀한 걸음 하시어
+따뜻한 축하와 정을 함께 나누어 주시면
+더없이 감사하겠습니다.</div>
     </section>
 
     <div class="card reveal delay-1">
@@ -774,11 +916,11 @@
       </div>
       <div class="info-row">
         <div class="label">장소</div>
-        <div class="value" id="venueName">수월 온기당</div>
+        <div class="value" id="venueName">온기당</div>
       </div>
       <div class="info-row">
         <div class="label">주소</div>
-        <div class="value" id="venueAddress">경상남도 거제시 수월동 온기당</div>
+        <div class="value" id="venueAddress">거제 수월동 온기당</div>
       </div>
     </div>
 
@@ -826,33 +968,59 @@
     </div>
 
     <section class="section reveal">
+      <div class="section-title">방명록</div>
+      <div class="divider"></div>
+    </section>
+
+    <div class="card reveal delay-1" style="padding:0;">
+      <div class="guestbook-form">
+        <input id="guestbookName" class="guestbook-input" type="text" maxlength="20" placeholder="이름" />
+        <textarea id="guestbookMessage" class="guestbook-textarea" maxlength="300" placeholder="축하 메시지를 남겨주세요"></textarea>
+        <button id="guestbookSubmit" class="guestbook-submit" type="button">메시지 남기기</button>
+        <div id="guestbookStatus" class="guestbook-status"></div>
+      </div>
+    </div>
+
+    <div class="guestbook-topline reveal delay-2">
+      <div id="guestbookTotal">총 0개</div>
+      <div id="guestbookPageInfo">1 / 1</div>
+    </div>
+
+    <div id="guestbookList" class="guestbook-list reveal delay-2">
+      <div class="guestbook-empty">아직 등록된 메시지가 없습니다.</div>
+    </div>
+
+    <div id="guestbookPagination" class="guestbook-pagination reveal delay-3"></div>
+    <div id="guestbookSummary" class="page-summary reveal delay-3"></div>
+
+    <section class="section reveal">
       <div class="section-title">우리의 순간</div>
       <div class="divider"></div>
     </section>
 
     <div class="gallery reveal delay-2">
-      <button type="button" onclick="openLightbox('./main.jpg?v=102')">
-        <img src="./main.jpg?v=102" alt="사진 1" />
+      <button type="button" onclick="openLightbox('./main.jpg?v=103')">
+        <img src="./main.jpg?v=103" alt="사진 1" />
       </button>
 
-      <button type="button" onclick="openLightbox('./sub1.jpg?v=102')">
-        <img src="./sub1.jpg?v=102" alt="사진 2" />
+      <button type="button" onclick="openLightbox('./sub1.jpg?v=103')">
+        <img src="./sub1.jpg?v=103" alt="사진 2" />
       </button>
 
-      <button type="button" onclick="openLightbox('./sub2.jpg?v=102')">
-        <img src="./sub2.jpg?v=102" alt="사진 3" />
+      <button type="button" onclick="openLightbox('./sub2.jpg?v=103')">
+        <img src="./sub2.jpg?v=103" alt="사진 3" />
       </button>
 
-      <button type="button" onclick="openLightbox('./sub3.jpg?v=102')">
-        <img src="./sub3.jpg?v=102" alt="사진 4" />
+      <button type="button" onclick="openLightbox('./sub3.jpg?v=103')">
+        <img src="./sub3.jpg?v=103" alt="사진 4" />
       </button>
 
-      <button type="button" onclick="openLightbox('./sub4.jpg?v=102')">
-        <img src="./sub4.jpg?v=102" alt="사진 5" />
+      <button type="button" onclick="openLightbox('./sub4.jpg?v=103')">
+        <img src="./sub4.jpg?v=103" alt="사진 5" />
       </button>
 
-      <button type="button" class="wide" onclick="openLightbox('./sub5.jpg?v=102')">
-        <img src="./sub5.jpg?v=102" alt="사진 6" />
+      <button type="button" class="wide" onclick="openLightbox('./sub5.jpg?v=103')">
+        <img src="./sub5.jpg?v=103" alt="사진 6" />
       </button>
     </div>
 
@@ -866,7 +1034,7 @@
   </div>
 
   <audio id="bgm" loop>
-    <source src="./music.mp3?v=102" type="audio/mpeg" />
+    <source src="./music.mp3?v=103" type="audio/mpeg" />
   </audio>
 
   <div class="lightbox" id="lightbox" onclick="closeLightbox(event)">
@@ -874,15 +1042,56 @@
     <img id="lightboxImg" src="" alt="확대 이미지" />
   </div>
 
-  <script>
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/12.12.0/firebase-app.js";
+    import {
+      getFirestore,
+      collection,
+      addDoc,
+      getDocs,
+      query,
+      orderBy,
+      limit
+    } from "https://www.gstatic.com/firebasejs/12.12.0/firebase-firestore.js";
+
+    const firebaseConfig = {
+      apiKey: "AIzaSyAnRejVV1FNWTRNEOwEezx4xI04ZhTD6LM",
+      authDomain: "wedding-2c2ed.firebaseapp.com",
+      projectId: "wedding-2c2ed",
+      storageBucket: "wedding-2c2ed.firebasestorage.app",
+      messagingSenderId: "44011060327",
+      appId: "1:44011060327:web:d37cc08f5482056ee14ab2",
+      measurementId: "G-YK4PEEH3J5"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const db = getFirestore(app);
+
     const eventDate = new Date("2026-05-23T18:00:00").getTime();
+    const kakaoMapSearchKeyword = "수원동 온기당";
+
     const venueName = document.getElementById("venueName").textContent.trim();
     const venueAddress = document.getElementById("venueAddress").textContent.trim();
     const bgm = document.getElementById("bgm");
     const musicBtn = document.getElementById("musicBtn");
 
+    const guestbookName = document.getElementById("guestbookName");
+    const guestbookMessage = document.getElementById("guestbookMessage");
+    const guestbookSubmit = document.getElementById("guestbookSubmit");
+    const guestbookStatus = document.getElementById("guestbookStatus");
+    const guestbookList = document.getElementById("guestbookList");
+    const guestbookPagination = document.getElementById("guestbookPagination");
+    const guestbookTotal = document.getElementById("guestbookTotal");
+    const guestbookPageInfo = document.getElementById("guestbookPageInfo");
+    const guestbookSummary = document.getElementById("guestbookSummary");
+
+    let guestbookItems = [];
+    let currentPage = 1;
+    const ITEMS_PER_PAGE = 4;
+    let introEntered = false;
+
     document.getElementById("kakaoMapBtn").href =
-      "https://map.kakao.com/link/search/" + encodeURIComponent(venueName + " " + venueAddress);
+      "https://map.kakao.com/link/search/" + encodeURIComponent(kakaoMapSearchKeyword);
 
     function updateCountdown() {
       const now = new Date().getTime();
@@ -910,7 +1119,7 @@
     updateCountdown();
     setInterval(updateCountdown, 1000);
 
-    async function copyText(id) {
+    window.copyText = async function (id) {
       const text = document.getElementById(id).innerText;
       try {
         await navigator.clipboard.writeText(text);
@@ -924,9 +1133,9 @@
         document.body.removeChild(temp);
         alert("계좌번호가 복사되었습니다.");
       }
-    }
+    };
 
-    function toggleMusic() {
+    window.toggleMusic = function () {
       if (bgm.paused) {
         bgm.play().then(() => {
           musicBtn.textContent = "❚❚";
@@ -939,9 +1148,12 @@
         musicBtn.textContent = "♫";
         musicBtn.classList.remove("playing");
       }
-    }
+    };
 
-    function enterInvitation() {
+    window.enterInvitation = function () {
+      if (introEntered) return;
+      introEntered = true;
+
       const envelope = document.getElementById("envelopeWrap");
       const intro = document.getElementById("intro");
 
@@ -950,31 +1162,29 @@
       bgm.play().then(() => {
         musicBtn.textContent = "❚❚";
         musicBtn.classList.add("playing");
-      }).catch(() => {
-        // 브라우저 정책으로 실패하면 그냥 넘어감
-      });
+      }).catch(() => {});
 
       setTimeout(() => {
         intro.classList.add("hidden");
       }, 1200);
-    }
+    };
 
-    function openLightbox(src) {
+    window.openLightbox = function (src) {
       document.getElementById("lightboxImg").src = src;
       document.getElementById("lightbox").classList.add("active");
       document.body.style.overflow = "hidden";
-    }
+    };
 
-    function closeLightbox(e) {
+    window.closeLightbox = function (e) {
       if (e.target.id === "lightbox") {
-        forceCloseLightbox();
+        window.forceCloseLightbox();
       }
-    }
+    };
 
-    function forceCloseLightbox() {
+    window.forceCloseLightbox = function () {
       document.getElementById("lightbox").classList.remove("active");
       document.body.style.overflow = "";
-    }
+    };
 
     const revealEls = document.querySelectorAll(".reveal");
     const observer = new IntersectionObserver((entries) => {
@@ -989,7 +1199,6 @@
 
     revealEls.forEach((el) => observer.observe(el));
 
-    // 꽃잎 생성
     const petalContainer = document.getElementById("petalContainer");
 
     function createPetals() {
@@ -1018,6 +1227,130 @@
     }
 
     createPetals();
+
+    function escapeHtml(text) {
+      const div = document.createElement("div");
+      div.textContent = text;
+      return div.innerHTML;
+    }
+
+    function formatDate(ts) {
+      const d = new Date(ts);
+      const y = d.getFullYear();
+      const m = String(d.getMonth() + 1).padStart(2, "0");
+      const day = String(d.getDate()).padStart(2, "0");
+      const hh = String(d.getHours()).padStart(2, "0");
+      const mm = String(d.getMinutes()).padStart(2, "0");
+      return `${y}.${m}.${day} ${hh}:${mm}`;
+    }
+
+    function renderGuestbook() {
+      const total = guestbookItems.length;
+      const totalPages = Math.max(1, Math.ceil(total / ITEMS_PER_PAGE));
+      if (currentPage > totalPages) currentPage = totalPages;
+
+      guestbookTotal.textContent = `총 ${total}개`;
+      guestbookPageInfo.textContent = `${currentPage} / ${totalPages}`;
+      guestbookSummary.textContent = total > 0
+        ? `${(currentPage - 1) * ITEMS_PER_PAGE + 1}-${Math.min(currentPage * ITEMS_PER_PAGE, total)} / ${total}`
+        : `0 / 0`;
+
+      if (total === 0) {
+        guestbookList.innerHTML = `<div class="guestbook-empty">아직 등록된 메시지가 없습니다.</div>`;
+        guestbookPagination.innerHTML = "";
+        return;
+      }
+
+      const start = (currentPage - 1) * ITEMS_PER_PAGE;
+      const pageItems = guestbookItems.slice(start, start + ITEMS_PER_PAGE);
+
+      guestbookList.innerHTML = pageItems.map((item) => `
+        <div class="guestbook-item">
+          <div class="guestbook-item-name">${escapeHtml(item.name)}</div>
+          <div class="guestbook-item-date">${formatDate(item.createdAt)}</div>
+          <div class="guestbook-item-message">${escapeHtml(item.message)}</div>
+        </div>
+      `).join("");
+
+      guestbookPagination.innerHTML = "";
+      for (let i = 1; i <= totalPages; i++) {
+        const btn = document.createElement("button");
+        btn.type = "button";
+        btn.className = i === currentPage ? "page-btn active" : "page-btn";
+        btn.textContent = String(i);
+        btn.addEventListener("click", () => {
+          currentPage = i;
+          renderGuestbook();
+          window.scrollTo({ top: guestbookList.offsetTop - 80, behavior: "smooth" });
+        });
+        guestbookPagination.appendChild(btn);
+      }
+    }
+
+    async function loadGuestbook() {
+      try {
+        guestbookStatus.textContent = "방명록을 불러오는 중입니다...";
+        const q = query(
+          collection(db, "guestbook"),
+          orderBy("createdAt", "desc"),
+          limit(200)
+        );
+        const snapshot = await getDocs(q);
+        guestbookItems = snapshot.docs.map((doc) => ({
+          id: doc.id,
+          ...doc.data()
+        }));
+        renderGuestbook();
+        guestbookStatus.textContent = "";
+      } catch (error) {
+        console.error(error);
+        guestbookStatus.textContent = "방명록을 불러오지 못했습니다.";
+      }
+    }
+
+    async function saveGuestbook() {
+      const name = guestbookName.value.trim();
+      const message = guestbookMessage.value.trim();
+
+      if (!name) {
+        guestbookStatus.textContent = "이름을 입력해주세요.";
+        guestbookName.focus();
+        return;
+      }
+
+      if (!message) {
+        guestbookStatus.textContent = "메시지를 입력해주세요.";
+        guestbookMessage.focus();
+        return;
+      }
+
+      try {
+        guestbookSubmit.disabled = true;
+        guestbookStatus.textContent = "메시지를 저장하는 중입니다...";
+
+        await addDoc(collection(db, "guestbook"), {
+          name,
+          message,
+          createdAt: Date.now()
+        });
+
+        guestbookName.value = "";
+        guestbookMessage.value = "";
+        guestbookStatus.textContent = "등록되었습니다.";
+
+        await loadGuestbook();
+        currentPage = 1;
+        renderGuestbook();
+      } catch (error) {
+        console.error(error);
+        guestbookStatus.textContent = "등록에 실패했습니다.";
+      } finally {
+        guestbookSubmit.disabled = false;
+      }
+    }
+
+    guestbookSubmit.addEventListener("click", saveGuestbook);
+    loadGuestbook();
   </script>
 </body>
 </html>
