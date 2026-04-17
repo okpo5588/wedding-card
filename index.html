@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -14,11 +13,16 @@
       -webkit-tap-highlight-color: transparent;
     }
 
+    html {
+      scroll-behavior: smooth;
+    }
+
     body {
       font-family: "Apple SD Gothic Neo", "Malgun Gothic", sans-serif;
       background: linear-gradient(180deg, #fffaf7 0%, #fff 100%);
       color: #333;
       line-height: 1.7;
+      overflow-x: hidden;
     }
 
     img {
@@ -38,6 +42,7 @@
       min-height: 100vh;
       box-shadow: 0 0 30px rgba(0, 0, 0, 0.05);
       overflow: hidden;
+      position: relative;
     }
 
     .hero {
@@ -53,6 +58,8 @@
       height: 100%;
       object-fit: cover;
       filter: brightness(0.88);
+      animation: heroZoom 12s ease-in-out infinite alternate;
+      transform-origin: center center;
     }
 
     .hero::after {
@@ -70,6 +77,7 @@
       z-index: 2;
       text-align: center;
       color: #fff;
+      animation: fadeUpHero 1.2s ease forwards;
     }
 
     .hero-badge {
@@ -80,6 +88,7 @@
       backdrop-filter: blur(6px);
       font-size: 13px;
       margin-bottom: 14px;
+      animation: floatBadge 2.4s ease-in-out infinite;
     }
 
     .hero-title {
@@ -87,11 +96,13 @@
       font-weight: 700;
       letter-spacing: -1px;
       margin-bottom: 10px;
+      text-shadow: 0 4px 18px rgba(0,0,0,0.18);
     }
 
     .hero-sub {
       font-size: 17px;
       opacity: 0.95;
+      text-shadow: 0 4px 18px rgba(0,0,0,0.18);
     }
 
     .section {
@@ -113,6 +124,7 @@
       margin: 0 auto 22px;
       background: #d8b39f;
       border-radius: 999px;
+      transform-origin: center;
     }
 
     .message {
@@ -127,6 +139,12 @@
       border: 1px solid #f0dfd3;
       border-radius: 22px;
       padding: 22px 18px;
+      transition: transform 0.35s ease, box-shadow 0.35s ease;
+    }
+
+    .card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 12px 28px rgba(0, 0, 0, 0.06);
     }
 
     .info-row + .info-row {
@@ -171,7 +189,13 @@
       padding: 14px 8px;
       border-radius: 18px;
       background: #fff5ef;
+      animation: softPulse 3s ease-in-out infinite;
     }
+
+    .time-box:nth-child(1) { animation-delay: 0s; }
+    .time-box:nth-child(2) { animation-delay: 0.3s; }
+    .time-box:nth-child(3) { animation-delay: 0.6s; }
+    .time-box:nth-child(4) { animation-delay: 0.9s; }
 
     .time-num {
       font-size: 28px;
@@ -205,6 +229,16 @@
       font-size: 15px;
       font-weight: 700;
       cursor: pointer;
+      transition: transform 0.2s ease, box-shadow 0.25s ease, opacity 0.25s ease;
+    }
+
+    .btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 10px 22px rgba(0,0,0,0.08);
+    }
+
+    .btn:active {
+      transform: scale(0.97);
     }
 
     .btn-primary {
@@ -231,12 +265,29 @@
       border-radius: 18px;
       overflow: hidden;
       cursor: pointer;
+      position: relative;
+      transition: transform 0.25s ease, box-shadow 0.3s ease;
+    }
+
+    .gallery button:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 14px 24px rgba(0,0,0,0.08);
+    }
+
+    .gallery button:active {
+      transform: scale(0.98);
     }
 
     .gallery img {
       height: 180px;
       object-fit: cover;
       border-radius: 18px;
+      transition: transform 0.4s ease, filter 0.35s ease;
+    }
+
+    .gallery button:hover img {
+      transform: scale(1.06);
+      filter: brightness(1.03);
     }
 
     .gallery .wide {
@@ -278,6 +329,16 @@
       font-size: 14px;
       font-weight: 700;
       cursor: pointer;
+      transition: transform 0.2s ease, box-shadow 0.25s ease;
+    }
+
+    .copy-btn:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 10px 18px rgba(0,0,0,0.08);
+    }
+
+    .copy-btn:active {
+      transform: scale(0.98);
     }
 
     .music-wrap {
@@ -297,6 +358,17 @@
       font-size: 22px;
       box-shadow: 0 10px 24px rgba(0,0,0,0.2);
       cursor: pointer;
+      animation: musicFloat 2.2s ease-in-out infinite;
+      transition: transform 0.2s ease, background 0.2s ease;
+    }
+
+    .music-btn:hover {
+      transform: scale(1.08);
+    }
+
+    .music-btn.playing {
+      background: rgba(216, 179, 159, 0.95);
+      animation: musicPulse 1.2s ease-in-out infinite;
     }
 
     .footer {
@@ -315,10 +387,13 @@
       justify-content: center;
       padding: 20px;
       z-index: 2000;
+      opacity: 0;
+      transition: opacity 0.28s ease;
     }
 
     .lightbox.active {
       display: flex;
+      opacity: 1;
     }
 
     .lightbox img {
@@ -327,6 +402,7 @@
       object-fit: contain;
       border-radius: 18px;
       box-shadow: 0 12px 36px rgba(0,0,0,0.35);
+      animation: zoomIn 0.28s ease;
     }
 
     .lightbox-close {
@@ -341,6 +417,284 @@
       color: #fff;
       font-size: 24px;
       cursor: pointer;
+      transition: transform 0.2s ease, background 0.2s ease;
+    }
+
+    .lightbox-close:hover {
+      transform: rotate(90deg);
+      background: rgba(255,255,255,0.22);
+    }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(36px);
+      transition: opacity 0.8s ease, transform 0.8s ease;
+      will-change: opacity, transform;
+    }
+
+    .reveal.show {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .reveal.delay-1 { transition-delay: 0.08s; }
+    .reveal.delay-2 { transition-delay: 0.16s; }
+    .reveal.delay-3 { transition-delay: 0.24s; }
+
+    /* 편지봉투 시작화면 */
+    .intro {
+      position: fixed;
+      inset: 0;
+      background:
+        radial-gradient(circle at top, rgba(255,255,255,0.6), rgba(255,255,255,0) 30%),
+        linear-gradient(180deg, #fdf6f1 0%, #f6ece4 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 4000;
+      transition: opacity 1s ease, visibility 1s ease;
+    }
+
+    .intro.hidden {
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
+    }
+
+    .intro-box {
+      text-align: center;
+      color: #7b5f50;
+      padding: 20px;
+      animation: fadeUpHero 1.2s ease;
+    }
+
+    .intro-title {
+      font-size: 18px;
+      margin-bottom: 28px;
+      letter-spacing: 1px;
+    }
+
+    .envelope-wrap {
+      position: relative;
+      width: 220px;
+      height: 150px;
+      margin: 0 auto 18px;
+      cursor: pointer;
+      animation: envelopeFloat 2.4s ease-in-out infinite;
+      perspective: 1000px;
+    }
+
+    .envelope {
+      position: relative;
+      width: 100%;
+      height: 100%;
+    }
+
+    .envelope-back {
+      position: absolute;
+      inset: 0;
+      background: #f1ddd2;
+      border-radius: 0 0 10px 10px;
+      box-shadow: 0 12px 26px rgba(0,0,0,0.12);
+      overflow: hidden;
+    }
+
+    .envelope-back::before,
+    .envelope-back::after {
+      content: "";
+      position: absolute;
+      bottom: 0;
+      width: 50%;
+      height: 100%;
+      background: #edd4c6;
+    }
+
+    .envelope-back::before {
+      left: 0;
+      clip-path: polygon(0 0, 100% 100%, 0 100%);
+    }
+
+    .envelope-back::after {
+      right: 0;
+      clip-path: polygon(100% 0, 100% 100%, 0 100%);
+    }
+
+    .envelope-letter {
+      position: absolute;
+      left: 10%;
+      right: 10%;
+      top: 18%;
+      height: 82%;
+      background: #fffdfb;
+      border-radius: 6px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 15px;
+      color: #6d4d3e;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+      transition: transform 1s ease, opacity 0.8s ease;
+    }
+
+    .envelope-letter span {
+      line-height: 1.8;
+      text-align: center;
+    }
+
+    .envelope-front {
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      height: 78%;
+      background: #f1ddd2;
+      clip-path: polygon(0 0, 50% 58%, 100% 0, 100% 100%, 0 100%);
+      border-radius: 0 0 10px 10px;
+    }
+
+    .envelope-flap {
+      position: absolute;
+      left: 0;
+      right: 0;
+      top: 0;
+      height: 80px;
+      background: #e7ccb9;
+      clip-path: polygon(0 0, 100% 0, 50% 100%);
+      transform-origin: top center;
+      transition: transform 1s ease;
+      z-index: 3;
+    }
+
+    .seal {
+      position: absolute;
+      top: 54%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 42px;
+      height: 42px;
+      border-radius: 50%;
+      background: #d8b39f;
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 18px;
+      z-index: 4;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+    }
+
+    .intro-sub {
+      font-size: 15px;
+      color: #8b6a59;
+      margin-top: 10px;
+    }
+
+    .envelope-wrap.open .envelope-flap {
+      transform: rotateX(180deg);
+    }
+
+    .envelope-wrap.open .envelope-letter {
+      transform: translateY(-64px);
+    }
+
+    /* 꽃잎 */
+    .petal-container {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      overflow: hidden;
+      z-index: 3000;
+    }
+
+    .petal {
+      position: absolute;
+      top: -10vh;
+      width: 14px;
+      height: 20px;
+      background: radial-gradient(circle at 30% 30%, #fff6fa 0%, #f7ccd9 50%, #efb7c7 100%);
+      border-radius: 70% 30% 70% 30%;
+      opacity: 0.88;
+      filter: blur(0.1px);
+      animation-name: petalFall, petalSway;
+      animation-timing-function: linear, ease-in-out;
+      animation-iteration-count: infinite, infinite;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.06);
+    }
+
+    @keyframes heroZoom {
+      0% { transform: scale(1); }
+      100% { transform: scale(1.08); }
+    }
+
+    @keyframes fadeUpHero {
+      0% {
+        opacity: 0;
+        transform: translateY(28px);
+      }
+      100% {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes floatBadge {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-6px); }
+    }
+
+    @keyframes softPulse {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-3px); }
+    }
+
+    @keyframes musicFloat {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-6px); }
+    }
+
+    @keyframes musicPulse {
+      0%, 100% { transform: scale(1); box-shadow: 0 10px 24px rgba(0,0,0,0.2); }
+      50% { transform: scale(1.08); box-shadow: 0 14px 28px rgba(216,179,159,0.38); }
+    }
+
+    @keyframes zoomIn {
+      from {
+        opacity: 0;
+        transform: scale(0.9);
+      }
+      to {
+        opacity: 1;
+        transform: scale(1);
+      }
+    }
+
+    @keyframes envelopeFloat {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-8px); }
+    }
+
+    @keyframes petalFall {
+      0% {
+        transform: translateY(-10vh) rotate(0deg);
+      }
+      100% {
+        transform: translateY(110vh) rotate(360deg);
+      }
+    }
+
+    @keyframes petalSway {
+      0%, 100% {
+        margin-left: 0;
+      }
+      25% {
+        margin-left: 18px;
+      }
+      50% {
+        margin-left: -18px;
+      }
+      75% {
+        margin-left: 12px;
+      }
     }
 
     @media (max-width: 390px) {
@@ -359,13 +713,42 @@
       .time-box {
         width: 68px;
       }
+
+      .envelope-wrap {
+        width: 200px;
+        height: 140px;
+      }
     }
   </style>
 </head>
 <body>
+  <!-- 꽃잎 -->
+  <div class="petal-container" id="petalContainer"></div>
+
+  <!-- 편지봉투 입장화면 -->
+  <div class="intro" id="intro">
+    <div class="intro-box">
+      <div class="intro-title">박영길 ♥ 김하늘 피로연 안내장</div>
+
+      <div class="envelope-wrap" id="envelopeWrap" onclick="enterInvitation()">
+        <div class="envelope">
+          <div class="envelope-back"></div>
+          <div class="envelope-letter">
+            <span>초대합니다<br>눌러서 입장하세요</span>
+          </div>
+          <div class="envelope-front"></div>
+          <div class="envelope-flap"></div>
+          <div class="seal">♥</div>
+        </div>
+      </div>
+
+      <div class="intro-sub">편지봉투를 눌러 입장해주세요</div>
+    </div>
+  </div>
+
   <div class="wrap">
     <section class="hero">
-      <img src="./main.jpg?v=100" alt="메인 사진" />
+      <img src="./main.jpg?v=102" alt="메인 사진" />
       <div class="hero-text">
         <div class="hero-badge">RECEPTION INVITATION</div>
         <div class="hero-title">박영길 ♥ 김하늘</div>
@@ -373,7 +756,7 @@
       </div>
     </section>
 
-    <section class="section">
+    <section class="section reveal">
       <div class="section-title">소중한 분들을 모십니다</div>
       <div class="divider"></div>
       <div class="message">두 사람이 서로를 아끼고 사랑하는 마음으로
@@ -384,7 +767,7 @@
 큰 기쁨이 되겠습니다.</div>
     </section>
 
-    <div class="card">
+    <div class="card reveal delay-1">
       <div class="info-row">
         <div class="label">일시</div>
         <div class="value">2026년 5월 23일 토요일 18시</div>
@@ -399,7 +782,7 @@
       </div>
     </div>
 
-    <div class="card count-card">
+    <div class="card count-card reveal delay-2">
       <div class="count-title">피로연까지 남은 시간</div>
       <div class="countdown">
         <div class="time-box">
@@ -421,7 +804,7 @@
       </div>
     </div>
 
-    <section class="section" style="padding-bottom: 24px;">
+    <section class="section reveal">
       <div class="section-title">오시는 길</div>
       <div class="divider"></div>
       <div class="btn-group">
@@ -430,50 +813,50 @@
       </div>
     </section>
 
-    <section class="section" style="padding-bottom: 24px;">
+    <section class="section reveal">
       <div class="section-title">마음 전하실 곳</div>
       <div class="divider"></div>
     </section>
 
-    <div class="card account-card">
+    <div class="card account-card reveal delay-1">
       <div class="account-title">신랑 신부 계좌</div>
       <div class="account-name">박영길</div>
       <div class="account-number" id="acc1">카카오뱅크 3333-15-2103804</div>
       <button class="copy-btn" type="button" onclick="copyText('acc1')">계좌번호 복사</button>
     </div>
 
-    <section class="section" style="padding-bottom: 24px;">
+    <section class="section reveal">
       <div class="section-title">우리의 순간</div>
       <div class="divider"></div>
     </section>
 
-    <div class="gallery">
-      <button type="button" onclick="openLightbox('./main.jpg?v=100')">
-        <img src="./main.jpg?v=100" alt="사진 1" />
+    <div class="gallery reveal delay-2">
+      <button type="button" onclick="openLightbox('./main.jpg?v=102')">
+        <img src="./main.jpg?v=102" alt="사진 1" />
       </button>
 
-      <button type="button" onclick="openLightbox('./sub1.jpg?v=100')">
-        <img src="./sub1.jpg?v=100" alt="사진 2" />
+      <button type="button" onclick="openLightbox('./sub1.jpg?v=102')">
+        <img src="./sub1.jpg?v=102" alt="사진 2" />
       </button>
 
-      <button type="button" onclick="openLightbox('./sub2.jpg?v=100')">
-        <img src="./sub2.jpg?v=100" alt="사진 3" />
+      <button type="button" onclick="openLightbox('./sub2.jpg?v=102')">
+        <img src="./sub2.jpg?v=102" alt="사진 3" />
       </button>
 
-      <button type="button" onclick="openLightbox('./sub3.jpg?v=100')">
-        <img src="./sub3.jpg?v=100" alt="사진 4" />
+      <button type="button" onclick="openLightbox('./sub3.jpg?v=102')">
+        <img src="./sub3.jpg?v=102" alt="사진 4" />
       </button>
 
-      <button type="button" onclick="openLightbox('./sub4.jpg?v=100')">
-        <img src="./sub4.jpg?v=100" alt="사진 5" />
+      <button type="button" onclick="openLightbox('./sub4.jpg?v=102')">
+        <img src="./sub4.jpg?v=102" alt="사진 5" />
       </button>
 
-      <button type="button" class="wide" onclick="openLightbox('./sub5.jpg?v=100')">
-        <img src="./sub5.jpg?v=100" alt="사진 6" />
+      <button type="button" class="wide" onclick="openLightbox('./sub5.jpg?v=102')">
+        <img src="./sub5.jpg?v=102" alt="사진 6" />
       </button>
     </div>
 
-    <div class="footer">
+    <div class="footer reveal">
       박영길 ♥ 김하늘 피로연 안내장
     </div>
   </div>
@@ -483,7 +866,7 @@
   </div>
 
   <audio id="bgm" loop>
-    <source src="./music.mp3?v=100" type="audio/mpeg" />
+    <source src="./music.mp3?v=102" type="audio/mpeg" />
   </audio>
 
   <div class="lightbox" id="lightbox" onclick="closeLightbox(event)">
@@ -495,6 +878,8 @@
     const eventDate = new Date("2026-05-23T18:00:00").getTime();
     const venueName = document.getElementById("venueName").textContent.trim();
     const venueAddress = document.getElementById("venueAddress").textContent.trim();
+    const bgm = document.getElementById("bgm");
+    const musicBtn = document.getElementById("musicBtn");
 
     document.getElementById("kakaoMapBtn").href =
       "https://map.kakao.com/link/search/" + encodeURIComponent(venueName + " " + venueAddress);
@@ -541,20 +926,37 @@
       }
     }
 
-    const bgm = document.getElementById("bgm");
-    const musicBtn = document.getElementById("musicBtn");
-
     function toggleMusic() {
       if (bgm.paused) {
         bgm.play().then(() => {
           musicBtn.textContent = "❚❚";
+          musicBtn.classList.add("playing");
         }).catch(() => {
           alert("음악 버튼을 한 번 더 눌러주세요.");
         });
       } else {
         bgm.pause();
         musicBtn.textContent = "♫";
+        musicBtn.classList.remove("playing");
       }
+    }
+
+    function enterInvitation() {
+      const envelope = document.getElementById("envelopeWrap");
+      const intro = document.getElementById("intro");
+
+      envelope.classList.add("open");
+
+      bgm.play().then(() => {
+        musicBtn.textContent = "❚❚";
+        musicBtn.classList.add("playing");
+      }).catch(() => {
+        // 브라우저 정책으로 실패하면 그냥 넘어감
+      });
+
+      setTimeout(() => {
+        intro.classList.add("hidden");
+      }, 1200);
     }
 
     function openLightbox(src) {
@@ -573,6 +975,49 @@
       document.getElementById("lightbox").classList.remove("active");
       document.body.style.overflow = "";
     }
+
+    const revealEls = document.querySelectorAll(".reveal");
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("show");
+        }
+      });
+    }, {
+      threshold: 0.12
+    });
+
+    revealEls.forEach((el) => observer.observe(el));
+
+    // 꽃잎 생성
+    const petalContainer = document.getElementById("petalContainer");
+
+    function createPetals() {
+      const petalCount = 22;
+
+      for (let i = 0; i < petalCount; i++) {
+        const petal = document.createElement("span");
+        petal.className = "petal";
+
+        const left = Math.random() * 100;
+        const size = 10 + Math.random() * 12;
+        const fallDuration = 7 + Math.random() * 8;
+        const swayDuration = 2 + Math.random() * 3;
+        const delay = Math.random() * 8;
+        const opacity = 0.55 + Math.random() * 0.4;
+
+        petal.style.left = left + "vw";
+        petal.style.width = size + "px";
+        petal.style.height = size * 1.4 + "px";
+        petal.style.opacity = opacity;
+        petal.style.animationDuration = fallDuration + "s, " + swayDuration + "s";
+        petal.style.animationDelay = delay + "s, " + delay + "s";
+
+        petalContainer.appendChild(petal);
+      }
+    }
+
+    createPetals();
   </script>
 </body>
 </html>
