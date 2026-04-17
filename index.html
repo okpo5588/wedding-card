@@ -3,415 +3,430 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>피로연 안내장</title>
-  <meta name="description" content="모바일 피로연 안내장" />
+  <title>박영길 ❤️ 김하늘 피로연 안내장</title>
+  <meta name="description" content="박영길 김하늘 피로연 안내장" />
   <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-      -webkit-tap-highlight-color: transparent;
-    }
-
-    :root {
-      --bg: #fffaf7;
-      --card: #ffffff;
-      --line: #f0e2d7;
-      --point: #d8b29a;
-      --point-dark: #9c7157;
-      --text: #2b2b2b;
-      --sub: #666666;
-      --shadow: 0 10px 30px rgba(0, 0, 0, 0.06);
-    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
 
     body {
-      font-family: "Apple SD Gothic Neo", "Malgun Gothic", sans-serif;
-      background: linear-gradient(180deg, #fffaf7 0%, #ffffff 100%);
-      color: var(--text);
+      font-family: "Malgun Gothic", "Apple SD Gothic Neo", sans-serif;
+      background:
+        radial-gradient(circle at top, #fff7fb 0%, #fffaf2 45%, #fffdf8 100%);
+      color: #4d4d4d;
       line-height: 1.7;
     }
 
-    a {
-      text-decoration: none;
-      color: inherit;
-    }
-
-    img {
-      display: block;
-      width: 100%;
-    }
-
     .wrap {
-      width: 100%;
-      max-width: 480px;
+      max-width: 520px;
       margin: 0 auto;
-      background: #fff;
+      background: #ffffff;
       min-height: 100vh;
-      box-shadow: 0 0 30px rgba(0, 0, 0, 0.04);
+      box-shadow: 0 12px 36px rgba(219, 153, 170, 0.16);
       overflow: hidden;
-      position: relative;
     }
 
     .hero {
       position: relative;
-      width: 100%;
-      height: 640px;
       overflow: hidden;
-      background: #eee;
+      background: linear-gradient(180deg, #fff4f8 0%, #fffaf3 100%);
     }
 
     .hero img {
       width: 100%;
-      height: 100%;
+      display: block;
       object-fit: cover;
-      filter: brightness(0.9);
-    }
-
-    .hero::after {
-      content: "";
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(to top, rgba(0,0,0,0.5), rgba(0,0,0,0.08));
     }
 
     .hero-text {
-      position: absolute;
-      left: 24px;
-      right: 24px;
-      bottom: 34px;
-      z-index: 2;
-      color: #fff;
+      padding: 30px 20px 26px;
       text-align: center;
+      background:
+        linear-gradient(to bottom, rgba(255,255,255,0.96), rgba(255,250,245,1));
     }
 
-    .hero-sub {
+    .badge {
+      display: inline-block;
+      padding: 8px 16px;
+      border-radius: 999px;
+      background: linear-gradient(135deg, #ff9eb5 0%, #f6b16a 100%);
+      color: #fff;
       font-size: 14px;
-      letter-spacing: 2px;
-      margin-bottom: 10px;
-      opacity: 0.95;
+      font-weight: bold;
+      margin-bottom: 14px;
+      box-shadow: 0 8px 18px rgba(245, 176, 106, 0.24);
     }
 
-    .hero-title {
+    h1 {
       font-size: 34px;
-      font-weight: 700;
-      letter-spacing: -1px;
-      margin-bottom: 12px;
-    }
-
-    .hero-names {
-      font-size: 22px;
-      font-weight: 600;
-      margin-bottom: 8px;
-    }
-
-    .hero-date {
-      font-size: 16px;
-      opacity: 0.95;
+      color: #cf6f8d;
+      margin-bottom: 0;
+      letter-spacing: -0.5px;
     }
 
     .section {
-      padding: 42px 22px;
+      padding: 34px 20px;
       text-align: center;
+      border-top: 1px solid #f8e6eb;
+      background: linear-gradient(180deg, #ffffff 0%, #fffdfb 100%);
+    }
+
+    .section:nth-child(even) {
+      background: linear-gradient(180deg, #fffdfc 0%, #fff8fb 100%);
     }
 
     .section-title {
-      font-size: 24px;
-      font-weight: 700;
-      letter-spacing: -0.5px;
-      margin-bottom: 12px;
+      font-size: 26px;
+      color: #dd7d98;
+      margin-bottom: 18px;
+      font-weight: bold;
+      letter-spacing: -0.3px;
     }
 
-    .divider {
-      width: 44px;
-      height: 2px;
-      background: var(--point);
-      margin: 0 auto 22px;
-      border-radius: 999px;
+    .names {
+      font-size: 28px;
+      font-weight: bold;
+      color: #8d6674;
+      margin-bottom: 14px;
     }
 
-    .message {
-      font-size: 16px;
-      color: var(--sub);
-      white-space: pre-line;
+    .heart {
+      color: #ff90ab;
+      padding: 0 8px;
     }
 
-    .info-card,
-    .count-card,
-    .map-card,
-    .account-card {
-      margin: 0 18px 18px;
-      background: var(--card);
-      border: 1px solid var(--line);
+    .info-box {
+      background: linear-gradient(180deg, #fff7fa 0%, #fffdf9 100%);
+      border: 1px solid #f7d9e2;
       border-radius: 22px;
-      box-shadow: var(--shadow);
+      padding: 22px;
+      margin-top: 18px;
+      text-align: left;
+      box-shadow: 0 8px 22px rgba(237, 183, 194, 0.14);
     }
 
-    .info-card {
-      padding: 24px 18px;
+    .info-row {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 12px;
+      font-size: 16px;
     }
 
-    .info-row + .info-row {
-      margin-top: 16px;
-      padding-top: 16px;
-      border-top: 1px solid #f4ebe4;
+    .info-row:last-child {
+      margin-bottom: 0;
     }
 
     .label {
-      font-size: 13px;
-      color: var(--point-dark);
-      margin-bottom: 4px;
+      min-width: 70px;
+      font-weight: bold;
+      color: #e0829c;
     }
 
     .value {
-      font-size: 17px;
-      font-weight: 600;
-      color: var(--text);
-      word-break: keep-all;
+      color: #5b5b5b;
+      flex: 1;
     }
 
-    .count-card {
-      padding: 22px 14px;
-    }
-
-    .count-title {
-      font-size: 14px;
-      color: var(--point-dark);
-      margin-bottom: 14px;
-      text-align: center;
-    }
-
-    .countdown {
-      display: flex;
-      justify-content: center;
-      gap: 10px;
-      flex-wrap: wrap;
-    }
-
-    .time-box {
-      width: 76px;
-      padding: 14px 8px;
-      border-radius: 18px;
-      background: #fff6f0;
-    }
-
-    .time-num {
-      font-size: 28px;
-      font-weight: 800;
-      line-height: 1.1;
-    }
-
-    .time-label {
-      margin-top: 4px;
-      font-size: 12px;
-      color: var(--point-dark);
-    }
-
-    .gallery {
-      padding: 0 18px 10px;
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 10px;
-    }
-
-    .gallery button {
-      border: none;
-      background: none;
-      padding: 0;
-      cursor: pointer;
-      border-radius: 18px;
-      overflow: hidden;
-    }
-
-    .gallery img {
-      height: 185px;
-      object-fit: cover;
-      border-radius: 18px;
-      transition: transform 0.2s ease;
-    }
-
-    .gallery button:active img {
-      transform: scale(0.98);
-    }
-
-    .gallery .wide {
-      grid-column: 1 / -1;
-    }
-
-    .map-card {
-      padding: 22px 18px;
-      text-align: center;
-      background: #fffaf7;
-    }
-
-    .map-place {
-      font-size: 20px;
-      font-weight: 700;
-      margin-bottom: 8px;
-    }
-
-    .map-address {
-      font-size: 15px;
-      color: var(--sub);
-      line-height: 1.6;
-      margin-bottom: 16px;
-      white-space: pre-line;
-    }
-
-    .btn-group {
-      display: flex;
-      gap: 10px;
-      justify-content: center;
-      flex-wrap: wrap;
-    }
-
-    .btn {
-      border: none;
-      padding: 13px 18px;
-      min-width: 140px;
-      border-radius: 999px;
-      font-size: 15px;
-      font-weight: 700;
-      cursor: pointer;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-    }
-
-    .btn-primary {
-      background: var(--point);
-      color: #fff;
-    }
-
-    .btn-secondary {
-      background: #f7eee8;
-      color: var(--point-dark);
-    }
-
-    .account-wrap {
-      padding: 0 18px 8px;
+    .btn-area {
       display: flex;
       flex-direction: column;
       gap: 12px;
+      margin-top: 22px;
     }
 
-    .account-card {
-      padding: 18px 16px;
-      background: #fffaf7;
+    .btn {
+      display: inline-block;
+      width: 100%;
+      border: none;
+      border-radius: 16px;
+      padding: 15px 16px;
+      font-size: 16px;
+      font-weight: bold;
+      cursor: pointer;
+      text-decoration: none;
+      transition: 0.2s;
     }
 
-    .account-title {
-      font-size: 14px;
-      color: var(--point-dark);
-      margin-bottom: 6px;
+    .btn:active {
+      transform: scale(0.98);
     }
 
-    .account-name {
-      font-size: 17px;
-      font-weight: 700;
-      margin-bottom: 5px;
+    .btn-primary {
+      background: linear-gradient(135deg, #ff9cb2 0%, #f4b36c 100%);
+      color: white;
+      box-shadow: 0 10px 22px rgba(246, 177, 106, 0.25);
     }
 
-    .account-number {
-      font-size: 15px;
-      color: var(--sub);
-      word-break: break-all;
+    .btn-secondary {
+      background: linear-gradient(180deg, #fff6f8 0%, #fffdfc 100%);
+      color: #d57693;
+      border: 1px solid #f3d7df;
+      box-shadow: 0 6px 14px rgba(233, 192, 202, 0.14);
+    }
+
+    .music-box {
+      background: linear-gradient(180deg, #fffaf3 0%, #fff6fb 100%);
+      border: 1px solid #f5dfc7;
+      border-radius: 22px;
+      padding: 20px;
+      box-shadow: 0 8px 20px rgba(245, 208, 175, 0.14);
+    }
+
+    .account-card,
+    .guestbook-form,
+    .guestbook-item {
+      background: linear-gradient(180deg, #fff8fb 0%, #fffefb 100%);
+      border: 1px solid #f5dbe3;
+      border-radius: 22px;
+      padding: 18px;
+      margin-top: 16px;
+      text-align: left;
+      box-shadow: 0 8px 18px rgba(232, 188, 198, 0.12);
+    }
+
+    .account-title,
+    .guestbook-item-name {
+      font-size: 18px;
+      font-weight: bold;
+      color: #dd7d98;
+      margin-bottom: 10px;
+    }
+
+    .account-text {
+      font-size: 16px;
+      color: #5b5b5b;
       margin-bottom: 12px;
+      word-break: break-all;
     }
 
     .copy-btn {
       width: 100%;
       border: none;
-      padding: 12px;
-      border-radius: 12px;
-      background: var(--point);
-      color: #fff;
-      font-size: 14px;
-      font-weight: 700;
+      background: linear-gradient(135deg, #ff9cb2 0%, #f4b36c 100%);
+      color: white;
+      border-radius: 14px;
+      padding: 13px;
+      font-size: 15px;
+      font-weight: bold;
       cursor: pointer;
+      box-shadow: 0 10px 20px rgba(246, 177, 106, 0.2);
+    }
+
+    .gallery {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      margin-top: 18px;
+    }
+
+    .gallery-btn {
+      display: block;
+      width: 100%;
+      border: none;
+      background: transparent;
+      padding: 0;
+      cursor: pointer;
+      border-radius: 16px;
+      overflow: hidden;
+      position: relative;
+      box-shadow: 0 8px 18px rgba(226, 190, 197, 0.16);
+      transition: transform 0.18s ease, box-shadow 0.18s ease;
+    }
+
+    .gallery-btn:active {
+      transform: scale(0.98);
+    }
+
+    .gallery-btn::after {
+      content: "크게 보기";
+      position: absolute;
+      left: 50%;
+      bottom: 10px;
+      transform: translateX(-50%);
+      background: rgba(0, 0, 0, 0.45);
+      color: #fff;
+      font-size: 12px;
+      padding: 5px 10px;
+      border-radius: 999px;
+      opacity: 0;
+      transition: opacity 0.2s ease;
+      pointer-events: none;
+    }
+
+    .gallery-btn:hover::after {
+      opacity: 1;
+    }
+
+    .gallery-btn img {
+      width: 100%;
+      height: 180px;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.25s ease;
+    }
+
+    .gallery-btn:hover img {
+      transform: scale(1.04);
     }
 
     .footer {
-      padding: 34px 22px 52px;
       text-align: center;
-      color: #8c8c8c;
+      padding: 30px 20px 40px;
+      color: #b18895;
       font-size: 14px;
+      background: linear-gradient(180deg, #fff7fa 0%, #fffaf3 100%);
+      border-top: 1px solid #f5e0e6;
     }
 
-    .music-control {
-      position: fixed;
-      right: 18px;
-      bottom: 18px;
-      z-index: 1000;
+    .input,
+    .textarea {
+      width: 100%;
+      border: 1px solid #efd5dd;
+      background: #ffffff;
+      border-radius: 14px;
+      padding: 14px;
+      font-size: 15px;
+      outline: none;
+      margin-bottom: 12px;
+      color: #555;
     }
 
-    .music-btn {
-      width: 58px;
-      height: 58px;
-      border: none;
-      border-radius: 50%;
-      background: rgba(30, 30, 30, 0.86);
-      color: #fff;
-      font-size: 22px;
-      cursor: pointer;
-      box-shadow: 0 10px 24px rgba(0,0,0,0.2);
+    .input:focus,
+    .textarea:focus {
+      border-color: #f3a3b7;
+      box-shadow: 0 0 0 4px rgba(255, 176, 196, 0.16);
+    }
+
+    .textarea {
+      min-height: 120px;
+      resize: vertical;
+      font-family: inherit;
+    }
+
+    .guestbook-actions {
+      display: flex;
+      gap: 10px;
+    }
+
+    .guestbook-list {
+      margin-top: 18px;
+    }
+
+    .guestbook-item {
+      margin-top: 12px;
+    }
+
+    .guestbook-item-date {
+      font-size: 12px;
+      color: #b9a3ac;
+      margin-bottom: 8px;
+    }
+
+    .guestbook-item-message {
+      font-size: 15px;
+      color: #555;
+      white-space: pre-wrap;
+      word-break: break-word;
+    }
+
+    .status-text {
+      margin-top: 12px;
+      font-size: 14px;
+      color: #d47b95;
+      text-align: center;
+    }
+
+    .empty-text {
+      padding: 18px;
+      border-radius: 18px;
+      background: linear-gradient(180deg, #fff7fa 0%, #fffdf8 100%);
+      color: #a88a95;
+      font-size: 15px;
+      border: 1px solid #f4dee5;
     }
 
     .lightbox {
       position: fixed;
       inset: 0;
-      background: rgba(0,0,0,0.88);
-      display: none;
+      background: rgba(24, 18, 22, 0.84);
+      backdrop-filter: blur(6px);
+      display: flex;
       align-items: center;
       justify-content: center;
       padding: 20px;
-      z-index: 2000;
+      z-index: 9999;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.28s ease;
     }
 
-    .lightbox.active {
+    .lightbox.show {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .lightbox-inner {
+      position: relative;
+      width: 100%;
+      max-width: 1100px;
       display: flex;
+      align-items: center;
+      justify-content: center;
+      transform: scale(0.9) translateY(18px);
+      transition: transform 0.28s ease;
     }
 
-    .lightbox img {
-      max-width: 100%;
-      max-height: 88vh;
-      object-fit: contain;
-      border-radius: 16px;
-      box-shadow: 0 12px 36px rgba(0,0,0,0.35);
+    .lightbox.show .lightbox-inner {
+      transform: scale(1) translateY(0);
+    }
+
+    .lightbox-img {
+      max-width: 96vw;
+      max-height: 86vh;
+      width: auto;
+      height: auto;
+      border-radius: 18px;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.35);
+      background: #fff;
     }
 
     .lightbox-close {
       position: absolute;
-      right: 18px;
-      top: 18px;
+      top: -14px;
+      right: -4px;
       width: 42px;
       height: 42px;
       border: none;
       border-radius: 50%;
-      background: rgba(255,255,255,0.14);
-      color: #fff;
+      background: rgba(255,255,255,0.95);
+      color: #cc6d8b;
       font-size: 24px;
+      font-weight: bold;
       cursor: pointer;
+      box-shadow: 0 10px 24px rgba(0,0,0,0.18);
     }
 
-    @media (max-width: 390px) {
-      .hero {
-        height: 580px;
-      }
+    .lightbox-caption {
+      position: absolute;
+      left: 50%;
+      bottom: -44px;
+      transform: translateX(-50%);
+      color: #fff;
+      font-size: 14px;
+      background: rgba(0,0,0,0.32);
+      padding: 8px 14px;
+      border-radius: 999px;
+      white-space: nowrap;
+    }
 
-      .hero-title {
-        font-size: 30px;
-      }
-
-      .hero-names {
-        font-size: 20px;
-      }
-
-      .gallery img {
-        height: 165px;
-      }
-
-      .time-box {
-        width: 68px;
+    @media (max-width: 420px) {
+      h1 { font-size: 30px; }
+      .names { font-size: 24px; }
+      .gallery-btn img { height: 150px; }
+      .section-title { font-size: 24px; }
+      .lightbox-caption {
+        bottom: -38px;
+        font-size: 12px;
+        padding: 7px 12px;
       }
     }
   </style>
@@ -419,238 +434,324 @@
 <body>
   <div class="wrap">
     <section class="hero">
-      <img src="./메인.jpg?v=10" alt="메인 사진" />
+      <img src="main.jpg" alt="신랑 신부 사진" />
       <div class="hero-text">
-        <div class="hero-sub">RECEPTION INVITATION</div>
-        <div class="hero-title">피로연에 초대합니다</div>
-        <div class="hero-names">박영길 ♥ 김하늘</div>
-        <div class="hero-date">2026년 4월 25일 토요일 18시</div>
+        <div class="badge">피로연 안내</div>
+        <h1>박영길 ♥ 김하늘</h1>
       </div>
     </section>
 
     <section class="section">
-      <div class="section-title">소중한 분들을 모십니다</div>
-      <div class="divider"></div>
-      <div class="message">두 사람이 서로를 아끼고 사랑하는 마음으로
-하나가 되는 날을 맞이하게 되었습니다.
+      <div class="section-title">Invitation</div>
+      <div class="names">신랑 박영길 <span class="heart">♥</span> 신부 김하늘</div>
 
-바쁘시더라도 함께하시어
-따뜻한 축복으로 자리를 빛내 주시면
-큰 기쁨이 되겠습니다.</div>
+      <div class="info-box">
+        <div class="info-row">
+          <div class="label">날짜</div>
+          <div class="value">2026년 5월 23일 토요일 18시</div>
+        </div>
+        <div class="info-row">
+          <div class="label">장소</div>
+          <div class="value">수월 온기당</div>
+        </div>
+      </div>
+
+      <div class="btn-area">
+        <a class="btn btn-primary" href="https://map.kakao.com/link/search/수월 온기당" target="_blank" rel="noopener noreferrer">
+          📍 지도 열기
+        </a>
+        <a class="btn btn-secondary" href="tel:01077140694">📞 신랑 신부에게 연락하기</a>
+      </div>
     </section>
-
-    <div class="info-card">
-      <div class="info-row">
-        <div class="label">일시</div>
-        <div class="value">2026년 4월 25일 토요일 18시</div>
-      </div>
-      <div class="info-row">
-        <div class="label">장소</div>
-        <div class="value">피로연 장소를 입력하세요</div>
-      </div>
-      <div class="info-row">
-        <div class="label">주소</div>
-        <div class="value">주소를 입력하세요</div>
-      </div>
-    </div>
-
-    <div class="count-card">
-      <div class="count-title">피로연까지 남은 시간</div>
-      <div class="countdown">
-        <div class="time-box">
-          <div class="time-num" id="days">0</div>
-          <div class="time-label">일</div>
-        </div>
-        <div class="time-box">
-          <div class="time-num" id="hours">0</div>
-          <div class="time-label">시간</div>
-        </div>
-        <div class="time-box">
-          <div class="time-num" id="minutes">0</div>
-          <div class="time-label">분</div>
-        </div>
-        <div class="time-box">
-          <div class="time-num" id="seconds">0</div>
-          <div class="time-label">초</div>
-        </div>
-      </div>
-    </div>
-
-    <section class="section" style="padding-bottom: 26px;">
-      <div class="section-title">우리의 순간</div>
-      <div class="divider"></div>
-    </section>
-
-    <div class="gallery">
-      <button type="button" onclick="openLightbox('./서브1.jpg?v=10')">
-        <img src="./서브1.jpg?v=10" alt="서브 사진 1" />
-      </button>
-
-      <button type="button" onclick="openLightbox('./sub2.jpg?v=10')">
-        <img src="./sub2.jpg?v=10" alt="서브 사진 2" />
-      </button>
-
-      <button type="button" onclick="openLightbox('./sub3.jpg?v=10')">
-        <img src="./sub3.jpg?v=10" alt="서브 사진 3" />
-      </button>
-
-      <button type="button" onclick="openLightbox('./sub4.jpg?v=10')">
-        <img src="./sub4.jpg?v=10" alt="서브 사진 4" />
-      </button>
-
-      <button type="button" class="wide" onclick="openLightbox('./서브5.jpg?v=10')">
-        <img src="./서브5.jpg?v=10" alt="서브 사진 5" />
-      </button>
-    </div>
 
     <section class="section">
-      <div class="section-title">오시는 길</div>
-      <div class="divider"></div>
-    </section>
-
-    <div class="map-card">
-      <div class="map-place" id="venueName">피로연 장소를 입력하세요</div>
-      <div class="map-address" id="venueAddress">주소를 입력하세요</div>
-
-      <div class="btn-group">
-        <a class="btn btn-primary" id="kakaoMapBtn" href="#" target="_blank" rel="noopener noreferrer">카카오맵</a>
-        <a class="btn btn-secondary" id="naverMapBtn" href="#" target="_blank" rel="noopener noreferrer">네이버지도</a>
+      <div class="section-title">Music</div>
+      <div class="music-box">
+        <button id="musicBtn" class="btn btn-primary">🎵 음악 재생</button>
+        <audio id="bgm" loop>
+          <source src="music.mp3" type="audio/mpeg" />
+        </audio>
       </div>
-    </div>
+    </section>
 
     <section class="section">
       <div class="section-title">마음 전하실 곳</div>
-      <div class="divider"></div>
+
+      <div class="account-card">
+        <div class="account-title">신랑 신부 계좌</div>
+        <div class="account-text">박영길 / 카카오뱅크 / 3333-15-2103804</div>
+        <button class="copy-btn" onclick="copyText('박영길 / 카카오뱅크 / 3333-15-2103804')">신랑 신부 계좌 복사</button>
+      </div>
     </section>
 
-    <div class="account-wrap">
-      <div class="account-card">
-        <div class="account-title">신랑측</div>
-        <div class="account-name">박영길</div>
-        <div class="account-number" id="acc1">은행명 계좌번호를 입력하세요</div>
-        <button class="copy-btn" type="button" onclick="copyText('acc1')">계좌번호 복사</button>
+    <section class="section">
+      <div class="section-title">방명록</div>
+
+      <div class="guestbook-form">
+        <input id="guestName" class="input" type="text" maxlength="20" placeholder="이름" />
+        <textarea id="guestMessage" class="textarea" maxlength="300" placeholder="축하 메시지를 남겨주세요"></textarea>
+        <div class="guestbook-actions">
+          <button id="saveGuestbookBtn" class="btn btn-primary" type="button">메시지 남기기</button>
+        </div>
+        <div id="guestbookStatus" class="status-text"></div>
       </div>
 
-      <div class="account-card">
-        <div class="account-title">신부측</div>
-        <div class="account-name">김하늘</div>
-        <div class="account-number" id="acc2">은행명 계좌번호를 입력하세요</div>
-        <button class="copy-btn" type="button" onclick="copyText('acc2')">계좌번호 복사</button>
+      <div id="guestbookList" class="guestbook-list">
+        <div class="empty-text">아직 등록된 메시지가 없습니다.</div>
       </div>
-    </div>
+    </section>
 
-    <div class="footer">
-      함께해 주시는 마음 오래도록 감사히 간직하겠습니다.
-    </div>
+    <section class="section">
+      <div class="section-title">Gallery</div>
+      <div class="gallery">
+        <button class="gallery-btn" type="button" data-full="main.jpg" data-caption="사진 1">
+          <img src="main.jpg" alt="갤러리 사진 1" />
+        </button>
+
+        <button class="gallery-btn" type="button" data-full="sub1.jpg" data-caption="사진 2">
+          <img src="sub1.jpg" alt="갤러리 사진 2" />
+        </button>
+
+        <button class="gallery-btn" type="button" data-full="sub2.jpg" data-caption="사진 3">
+          <img src="sub2.jpg" alt="갤러리 사진 3" />
+        </button>
+
+        <button class="gallery-btn" type="button" data-full="sub3.jpg" data-caption="사진 4">
+          <img src="sub3.jpg" alt="갤러리 사진 4" />
+        </button>
+
+        <button class="gallery-btn" type="button" data-full="sub4.jpg" data-caption="사진 5">
+          <img src="sub4.jpg" alt="갤러리 사진 5" />
+        </button>
+
+        <button class="gallery-btn" type="button" data-full="sub5.jpg" data-caption="사진 6">
+          <img src="sub5.jpg" alt="갤러리 사진 6" />
+        </button>
+      </div>
+    </section>
+
+    <footer class="footer">
+      박영길 ♥ 김하늘 피로연 안내장
+    </footer>
   </div>
 
-  <div class="music-control">
-    <button type="button" class="music-btn" id="musicBtn" onclick="toggleMusic()">♫</button>
-  </div>
-
-  <audio id="bgm" loop>
-    <source src="./음악.mp3?v=10" type="audio/mpeg" />
-  </audio>
-
-  <div class="lightbox" id="lightbox" onclick="closeLightbox(event)">
-    <button type="button" class="lightbox-close" onclick="forceCloseLightbox()">×</button>
-    <img id="lightboxImg" src="" alt="확대 이미지" />
+  <div id="lightbox" class="lightbox" aria-hidden="true">
+    <div class="lightbox-inner">
+      <button id="lightboxClose" class="lightbox-close" type="button" aria-label="닫기">×</button>
+      <img id="lightboxImg" class="lightbox-img" src="" alt="확대 사진" />
+      <div id="lightboxCaption" class="lightbox-caption"></div>
+    </div>
   </div>
 
   <script>
-    const eventDate = new Date("2026-04-25T18:00:00").getTime();
-
-    const venueName = "피로연 장소를 입력하세요";
-    const venueAddress = "주소를 입력하세요";
-
-    document.getElementById("venueName").textContent = venueName;
-    document.getElementById("venueAddress").textContent = venueAddress;
-
-    document.getElementById("kakaoMapBtn").href =
-      "https://map.kakao.com/link/search/" + encodeURIComponent(venueName + " " + venueAddress);
-
-    document.getElementById("naverMapBtn").href =
-      "https://map.naver.com/v5/search/" + encodeURIComponent(venueName + " " + venueAddress);
-
-    function updateCountdown() {
-      const now = new Date().getTime();
-      const gap = eventDate - now;
-
-      if (gap <= 0) {
-        document.getElementById("days").textContent = "0";
-        document.getElementById("hours").textContent = "0";
-        document.getElementById("minutes").textContent = "0";
-        document.getElementById("seconds").textContent = "0";
-        return;
-      }
-
-      const days = Math.floor(gap / (1000 * 60 * 60 * 24));
-      const hours = Math.floor((gap / (1000 * 60 * 60)) % 24);
-      const minutes = Math.floor((gap / (1000 * 60)) % 60);
-      const seconds = Math.floor((gap / 1000) % 60);
-
-      document.getElementById("days").textContent = String(days);
-      document.getElementById("hours").textContent = String(hours);
-      document.getElementById("minutes").textContent = String(minutes);
-      document.getElementById("seconds").textContent = String(seconds);
-    }
-
-    updateCountdown();
-    setInterval(updateCountdown, 1000);
-
-    async function copyText(id) {
-      const text = document.getElementById(id).innerText;
-
-      try {
-        await navigator.clipboard.writeText(text);
-        alert("계좌번호가 복사되었습니다.");
-      } catch (error) {
-        const temp = document.createElement("textarea");
-        temp.value = text;
-        document.body.appendChild(temp);
-        temp.select();
-        document.execCommand("copy");
-        document.body.removeChild(temp);
-        alert("계좌번호가 복사되었습니다.");
-      }
-    }
-
-    const bgm = document.getElementById("bgm");
     const musicBtn = document.getElementById("musicBtn");
+    const bgm = document.getElementById("bgm");
+    let isPlaying = false;
 
-    function toggleMusic() {
-      if (bgm.paused) {
-        bgm.play()
-          .then(() => {
-            musicBtn.textContent = "❚❚";
-          })
-          .catch(() => {
-            alert("음악 재생은 화면을 한 번 누른 뒤 다시 눌러주세요.");
-          });
-      } else {
-        bgm.pause();
-        musicBtn.textContent = "♫";
+    musicBtn.addEventListener("click", async () => {
+      try {
+        if (!isPlaying) {
+          await bgm.play();
+          isPlaying = true;
+          musicBtn.textContent = "⏸ 음악 정지";
+        } else {
+          bgm.pause();
+          isPlaying = false;
+          musicBtn.textContent = "🎵 음악 재생";
+        }
+      } catch (e) {
+        alert("음악 재생에 실패했습니다.");
       }
+    });
+
+    function copyText(text) {
+      navigator.clipboard.writeText(text)
+        .then(() => alert("계좌정보가 복사되었습니다."))
+        .catch(() => {
+          const textArea = document.createElement("textarea");
+          textArea.value = text;
+          textArea.style.position = "fixed";
+          textArea.style.left = "-9999px";
+          document.body.appendChild(textArea);
+          textArea.focus();
+          textArea.select();
+          try {
+            document.execCommand("copy");
+            alert("계좌정보가 복사되었습니다.");
+          } catch (err) {
+            alert("복사에 실패했습니다.");
+          }
+          document.body.removeChild(textArea);
+        });
     }
 
-    function openLightbox(src) {
-      const lightbox = document.getElementById("lightbox");
-      const lightboxImg = document.getElementById("lightboxImg");
+    const lightbox = document.getElementById("lightbox");
+    const lightboxImg = document.getElementById("lightboxImg");
+    const lightboxCaption = document.getElementById("lightboxCaption");
+    const lightboxClose = document.getElementById("lightboxClose");
+    const galleryButtons = document.querySelectorAll(".gallery-btn");
+
+    function openLightbox(src, caption) {
       lightboxImg.src = src;
-      lightbox.classList.add("active");
+      lightboxCaption.textContent = caption || "";
+      lightbox.classList.add("show");
+      lightbox.setAttribute("aria-hidden", "false");
       document.body.style.overflow = "hidden";
     }
 
-    function closeLightbox(e) {
-      if (e.target.id === "lightbox") {
-        forceCloseLightbox();
+    function closeLightbox() {
+      lightbox.classList.remove("show");
+      lightbox.setAttribute("aria-hidden", "true");
+      document.body.style.overflow = "";
+      setTimeout(() => {
+        if (!lightbox.classList.contains("show")) {
+          lightboxImg.src = "";
+          lightboxCaption.textContent = "";
+        }
+      }, 250);
+    }
+
+    galleryButtons.forEach((button) => {
+      button.addEventListener("click", () => {
+        openLightbox(button.dataset.full, button.dataset.caption);
+      });
+    });
+
+    lightboxClose.addEventListener("click", closeLightbox);
+
+    lightbox.addEventListener("click", (e) => {
+      if (e.target === lightbox) {
+        closeLightbox();
+      }
+    });
+
+    document.addEventListener("keydown", (e) => {
+      if (e.key === "Escape" && lightbox.classList.contains("show")) {
+        closeLightbox();
+      }
+    });
+  </script>
+
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/12.12.0/firebase-app.js";
+    import {
+      getFirestore,
+      collection,
+      addDoc,
+      getDocs,
+      query,
+      orderBy,
+      limit
+    } from "https://www.gstatic.com/firebasejs/12.12.0/firebase-firestore.js";
+
+    const firebaseConfig = {
+      apiKey: "AIzaSyAnRejVV1FNWTRNEOwEezx4xI04ZhTD6LM",
+      authDomain: "wedding-2c2ed.firebaseapp.com",
+      projectId: "wedding-2c2ed",
+      storageBucket: "wedding-2c2ed.firebasestorage.app",
+      messagingSenderId: "44011060327",
+      appId: "1:44011060327:web:d37cc08f5482056ee14ab2",
+      measurementId: "G-YK4PEEH3J5"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const db = getFirestore(app);
+
+    const guestName = document.getElementById("guestName");
+    const guestMessage = document.getElementById("guestMessage");
+    const saveGuestbookBtn = document.getElementById("saveGuestbookBtn");
+    const guestbookList = document.getElementById("guestbookList");
+    const guestbookStatus = document.getElementById("guestbookStatus");
+
+    function escapeHtml(text) {
+      const div = document.createElement("div");
+      div.textContent = text;
+      return div.innerHTML;
+    }
+
+    function formatDate(ts) {
+      const d = new Date(ts);
+      const y = d.getFullYear();
+      const m = String(d.getMonth() + 1).padStart(2, "0");
+      const day = String(d.getDate()).padStart(2, "0");
+      const hh = String(d.getHours()).padStart(2, "0");
+      const mm = String(d.getMinutes()).padStart(2, "0");
+      return `${y}.${m}.${day} ${hh}:${mm}`;
+    }
+
+    function renderGuestbook(items) {
+      if (!items.length) {
+        guestbookList.innerHTML = `<div class="empty-text">아직 등록된 메시지가 없습니다.</div>`;
+        return;
+      }
+
+      guestbookList.innerHTML = items.map(item => `
+        <div class="guestbook-item">
+          <div class="guestbook-item-name">${escapeHtml(item.name)}</div>
+          <div class="guestbook-item-date">${formatDate(item.createdAt)}</div>
+          <div class="guestbook-item-message">${escapeHtml(item.message)}</div>
+        </div>
+      `).join("");
+    }
+
+    async function loadGuestbook() {
+      try {
+        guestbookStatus.textContent = "불러오는 중입니다...";
+        const q = query(
+          collection(db, "guestbook"),
+          orderBy("createdAt", "desc"),
+          limit(30)
+        );
+        const snapshot = await getDocs(q);
+        const items = snapshot.docs.map(doc => doc.data());
+        renderGuestbook(items);
+        guestbookStatus.textContent = "";
+      } catch (error) {
+        console.error(error);
+        guestbookStatus.textContent = "방명록을 불러오지 못했습니다.";
       }
     }
 
-    function forceCloseLightbox() {
-      document.getElementById("lightbox").classList.remove("active");
-      document.body.style.overflow = "";
+    async function saveGuestbook() {
+      const name = guestName.value.trim();
+      const message = guestMessage.value.trim();
+
+      if (!name) {
+        alert("이름을 입력해 주세요.");
+        guestName.focus();
+        return;
+      }
+
+      if (!message) {
+        alert("메시지를 입력해 주세요.");
+        guestMessage.focus();
+        return;
+      }
+
+      try {
+        saveGuestbookBtn.disabled = true;
+        guestbookStatus.textContent = "등록 중입니다...";
+
+        await addDoc(collection(db, "guestbook"), {
+          name,
+          message,
+          createdAt: Date.now()
+        });
+
+        guestName.value = "";
+        guestMessage.value = "";
+        guestbookStatus.textContent = "등록되었습니다.";
+        await loadGuestbook();
+      } catch (error) {
+        console.error(error);
+        guestbookStatus.textContent = "등록에 실패했습니다.";
+      } finally {
+        saveGuestbookBtn.disabled = false;
+      }
     }
+
+    saveGuestbookBtn.addEventListener("click", saveGuestbook);
+    loadGuestbook();
   </script>
 </body>
 </html>
