@@ -705,6 +705,14 @@
       text-align: left;
     }
 
+    .guestbook-item-header {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 10px;
+      margin-bottom: 8px;
+    }
+
     .guestbook-item-name {
       font-size: 15px;
       font-weight: 700;
@@ -715,7 +723,6 @@
     .guestbook-item-date {
       font-size: 12px;
       color: #a98b7a;
-      margin-bottom: 8px;
     }
 
     .guestbook-item-message {
@@ -724,6 +731,17 @@
       white-space: pre-wrap;
       word-break: break-word;
       line-height: 1.65;
+    }
+
+    .guestbook-delete-btn {
+      border: 1px solid #ead9cc;
+      background: #fff;
+      color: #8b6a59;
+      border-radius: 999px;
+      font-size: 12px;
+      padding: 6px 10px;
+      cursor: pointer;
+      flex-shrink: 0;
     }
 
     .guestbook-empty {
@@ -889,7 +907,7 @@
 
   <div class="wrap">
     <section class="hero">
-      <img src="./main.jpg?v=103" alt="메인 사진" />
+      <img src="./main.jpg?v=104" alt="메인 사진" />
       <div class="hero-text">
         <div class="hero-badge">RECEPTION INVITATION</div>
         <div class="hero-title">박영길 ♥ 김하늘</div>
@@ -975,6 +993,7 @@
     <div class="card reveal delay-1" style="padding:0;">
       <div class="guestbook-form">
         <input id="guestbookName" class="guestbook-input" type="text" maxlength="20" placeholder="이름" />
+        <input id="guestbookPassword" class="guestbook-input" type="password" maxlength="20" placeholder="비밀번호 (삭제할 때 사용)" />
         <textarea id="guestbookMessage" class="guestbook-textarea" maxlength="300" placeholder="축하 메시지를 남겨주세요"></textarea>
         <button id="guestbookSubmit" class="guestbook-submit" type="button">메시지 남기기</button>
         <div id="guestbookStatus" class="guestbook-status"></div>
@@ -999,28 +1018,28 @@
     </section>
 
     <div class="gallery reveal delay-2">
-      <button type="button" onclick="openLightbox('./main.jpg?v=103')">
-        <img src="./main.jpg?v=103" alt="사진 1" />
+      <button type="button" onclick="openLightbox('./main.jpg?v=104')">
+        <img src="./main.jpg?v=104" alt="사진 1" />
       </button>
 
-      <button type="button" onclick="openLightbox('./sub1.jpg?v=103')">
-        <img src="./sub1.jpg?v=103" alt="사진 2" />
+      <button type="button" onclick="openLightbox('./sub1.jpg?v=104')">
+        <img src="./sub1.jpg?v=104" alt="사진 2" />
       </button>
 
-      <button type="button" onclick="openLightbox('./sub2.jpg?v=103')">
-        <img src="./sub2.jpg?v=103" alt="사진 3" />
+      <button type="button" onclick="openLightbox('./sub2.jpg?v=104')">
+        <img src="./sub2.jpg?v=104" alt="사진 3" />
       </button>
 
-      <button type="button" onclick="openLightbox('./sub3.jpg?v=103')">
-        <img src="./sub3.jpg?v=103" alt="사진 4" />
+      <button type="button" onclick="openLightbox('./sub3.jpg?v=104')">
+        <img src="./sub3.jpg?v=104" alt="사진 4" />
       </button>
 
-      <button type="button" onclick="openLightbox('./sub4.jpg?v=103')">
-        <img src="./sub4.jpg?v=103" alt="사진 5" />
+      <button type="button" onclick="openLightbox('./sub4.jpg?v=104')">
+        <img src="./sub4.jpg?v=104" alt="사진 5" />
       </button>
 
-      <button type="button" class="wide" onclick="openLightbox('./sub5.jpg?v=103')">
-        <img src="./sub5.jpg?v=103" alt="사진 6" />
+      <button type="button" class="wide" onclick="openLightbox('./sub5.jpg?v=104')">
+        <img src="./sub5.jpg?v=104" alt="사진 6" />
       </button>
     </div>
 
@@ -1034,7 +1053,7 @@
   </div>
 
   <audio id="bgm" loop>
-    <source src="./music.mp3?v=103" type="audio/mpeg" />
+    <source src="./music.mp3?v=104" type="audio/mpeg" />
   </audio>
 
   <div class="lightbox" id="lightbox" onclick="closeLightbox(event)">
@@ -1051,7 +1070,9 @@
       getDocs,
       query,
       orderBy,
-      limit
+      limit,
+      deleteDoc,
+      doc
     } from "https://www.gstatic.com/firebasejs/12.12.0/firebase-firestore.js";
 
     const firebaseConfig = {
@@ -1068,14 +1089,13 @@
     const db = getFirestore(app);
 
     const eventDate = new Date("2026-05-23T18:00:00").getTime();
-    const kakaoMapSearchKeyword = "수원동 온기당";
+    const kakaoMapSearchKeyword = "수월동 온기당";
 
-    const venueName = document.getElementById("venueName").textContent.trim();
-    const venueAddress = document.getElementById("venueAddress").textContent.trim();
     const bgm = document.getElementById("bgm");
     const musicBtn = document.getElementById("musicBtn");
 
     const guestbookName = document.getElementById("guestbookName");
+    const guestbookPassword = document.getElementById("guestbookPassword");
     const guestbookMessage = document.getElementById("guestbookMessage");
     const guestbookSubmit = document.getElementById("guestbookSubmit");
     const guestbookStatus = document.getElementById("guestbookStatus");
@@ -1244,6 +1264,34 @@
       return `${y}.${m}.${day} ${hh}:${mm}`;
     }
 
+    function bindDeleteButtons() {
+      const buttons = document.querySelectorAll(".guestbook-delete-btn");
+      buttons.forEach((btn) => {
+        btn.addEventListener("click", async () => {
+          const id = btn.dataset.id;
+          const item = guestbookItems.find((x) => x.id === id);
+          if (!item) return;
+
+          const inputPassword = prompt("삭제 비밀번호를 입력해주세요.");
+          if (inputPassword === null) return;
+
+          if (inputPassword !== item.password) {
+            alert("비밀번호가 일치하지 않습니다.");
+            return;
+          }
+
+          try {
+            await deleteDoc(doc(db, "guestbook", id));
+            guestbookStatus.textContent = "삭제되었습니다.";
+            await loadGuestbook();
+          } catch (error) {
+            console.error(error);
+            guestbookStatus.textContent = "삭제에 실패했습니다.";
+          }
+        });
+      });
+    }
+
     function renderGuestbook() {
       const total = guestbookItems.length;
       const totalPages = Math.max(1, Math.ceil(total / ITEMS_PER_PAGE));
@@ -1266,8 +1314,13 @@
 
       guestbookList.innerHTML = pageItems.map((item) => `
         <div class="guestbook-item">
-          <div class="guestbook-item-name">${escapeHtml(item.name)}</div>
-          <div class="guestbook-item-date">${formatDate(item.createdAt)}</div>
+          <div class="guestbook-item-header">
+            <div>
+              <div class="guestbook-item-name">${escapeHtml(item.name)}</div>
+              <div class="guestbook-item-date">${formatDate(item.createdAt)}</div>
+            </div>
+            <button type="button" class="guestbook-delete-btn" data-id="${item.id}">삭제</button>
+          </div>
           <div class="guestbook-item-message">${escapeHtml(item.message)}</div>
         </div>
       `).join("");
@@ -1285,6 +1338,8 @@
         });
         guestbookPagination.appendChild(btn);
       }
+
+      bindDeleteButtons();
     }
 
     async function loadGuestbook() {
@@ -1296,9 +1351,9 @@
           limit(200)
         );
         const snapshot = await getDocs(q);
-        guestbookItems = snapshot.docs.map((doc) => ({
-          id: doc.id,
-          ...doc.data()
+        guestbookItems = snapshot.docs.map((docSnap) => ({
+          id: docSnap.id,
+          ...docSnap.data()
         }));
         renderGuestbook();
         guestbookStatus.textContent = "";
@@ -1310,11 +1365,24 @@
 
     async function saveGuestbook() {
       const name = guestbookName.value.trim();
+      const password = guestbookPassword.value.trim();
       const message = guestbookMessage.value.trim();
 
       if (!name) {
         guestbookStatus.textContent = "이름을 입력해주세요.";
         guestbookName.focus();
+        return;
+      }
+
+      if (!password) {
+        guestbookStatus.textContent = "비밀번호를 입력해주세요.";
+        guestbookPassword.focus();
+        return;
+      }
+
+      if (password.length < 4) {
+        guestbookStatus.textContent = "비밀번호는 4자 이상 입력해주세요.";
+        guestbookPassword.focus();
         return;
       }
 
@@ -1330,17 +1398,18 @@
 
         await addDoc(collection(db, "guestbook"), {
           name,
+          password,
           message,
           createdAt: Date.now()
         });
 
         guestbookName.value = "";
+        guestbookPassword.value = "";
         guestbookMessage.value = "";
         guestbookStatus.textContent = "등록되었습니다.";
 
-        await loadGuestbook();
         currentPage = 1;
-        renderGuestbook();
+        await loadGuestbook();
       } catch (error) {
         console.error(error);
         guestbookStatus.textContent = "등록에 실패했습니다.";
